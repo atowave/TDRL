@@ -14,13 +14,14 @@ namespace MovingEngine.classes
         public static void Aim()
         {
             Globals.player.rad = XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
-
-            Console.WriteLine(rad);
             RotateTransform rotateTransform = new RotateTransform(rad, 45, 45);
             Globals.player.visual.RenderTransform = rotateTransform;
         }
 
-        public static 
+        public static void Shoot()
+        {
+
+        }
         public static double XYToDegrees(double x, double y)
         {
             double ox = x;
