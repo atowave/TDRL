@@ -25,7 +25,7 @@ namespace MovingEngine.classes
             Canvas shoot_projectile = new Canvas {
                 Background = Brushes.Red,
                 Width = 10,
-                Height = 80
+                Height = 40
             };
 
             shoot_projectile.RenderTransform = new RotateTransform(Globals.player.rad, 5, 0);
@@ -33,14 +33,9 @@ namespace MovingEngine.classes
             double vec_y = Globals.mouse_position.Y - Globals.Middlepoint.Y;
             double per_x = (Math.Abs(vec_x) / (Math.Abs(vec_x) + Math.Abs(vec_y)));
             double per_y = (Math.Abs(vec_y) / (Math.Abs(vec_x) + Math.Abs(vec_y)));
-            double new_x = Math.Sqrt(Math.Pow(10 * per_x, 2)) * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
-            double new_y = Math.Sqrt(Math.Pow(10 * per_y, 2)) * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
-            //double new_x = 10 * per_x * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
-            //double new_y = 10 * per_y * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
-            Debug.WriteLine(vec_x + " | " + vec_y);
-            Debug.WriteLine(per_x + " | " + per_y);
-            Debug.WriteLine(new_x + " | " + new_y);
-            new Projectile(shoot_projectile, new Point(Globals.Middlepoint.X - 5, Globals.Middlepoint.Y - 5), new double[] { new_x, new_y, });
+            double new_x = Math.Sqrt(Math.Pow(20 * per_x, 2)) * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
+            double new_y = Math.Sqrt(Math.Pow(20 * per_y, 2)) * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
+            new Projectile(shoot_projectile, new Point((Collision.visualPointsR[0].X + Collision.visualPointsR[3].X) / 2, (Collision.visualPointsR[0].Y + Collision.visualPointsR[3].Y) / 2), new double[] { new_x, new_y });
         }
     }
 }

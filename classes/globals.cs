@@ -17,7 +17,7 @@ namespace MovingEngine
         public static Canvas canvas;
         public static Player player = new Player();
         public static Baselevel currentLevel;
-        public const double default_step = 5;
+        public const double default_step = 7.5;
         public static double step;
         public static Point mouse_position;
         public static MouseHandler MouseHandler = new MouseHandler();

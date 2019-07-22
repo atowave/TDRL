@@ -25,7 +25,7 @@ namespace MovingEngine
             Weapons.Aim();
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.Canvas) + " | " + Canvas.GetTop(Globals.currentLevel.Canvas) + "], " + Globals.player.rad + "°";
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
-            if (!Keyboard.IsKeyDown(Key.LeftShift)) Globals.step = Globals.default_step;
+            Globals.step = Globals.default_step;
         }
 
         private void Mouse_Action()
@@ -50,7 +50,7 @@ namespace MovingEngine
 
         private void Moving()
         {
-            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.LeftShift};
+            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D};
             foreach (Key key in keys)
             {
                 if (Keyboard.IsKeyDown(key))
@@ -70,9 +70,6 @@ namespace MovingEngine
                             break;
                         case Key.D:
                             Globals.currentLevel.Public_location.X -= Globals.step;
-                            break;
-                        case Key.LeftShift:
-                            Globals.step = Globals.default_step + 10;
                             break;
                     }
                 }
