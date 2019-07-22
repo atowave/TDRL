@@ -29,6 +29,10 @@ namespace MovingEngine
             InitializeComponent();
             Globals.canvas = new Canvas { Background = Brushes.Black};
             Content = Globals.canvas;
+            Globals.fontSizeMultiplier = SystemParameters.VirtualScreenWidth / 1936;
+            if (Globals.fontSizeMultiplier > 1)
+                Globals.fontSizeMultiplier = 1;
+            FontFamily = (FontFamily)Resources["FixedSys"];
             MouseMove += MouseSaver;
             MouseDown += GameLoop.Mouse;
             MouseUp += (object sender, MouseButtonEventArgs e) => Globals.MouseHandler.Pressed = MouseButtonState.Released;
@@ -45,10 +49,11 @@ namespace MovingEngine
             };
             Globals.canvas.Children.Add(Globals.Debug);
 
-            DispatcherTimer gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
-            gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
-            gamelooptimer.Start();
+            Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
+            Globals.gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
+            
             LoadLevel();
+            MainMenu.Start();
 
             Collision.InitDebug();
         }

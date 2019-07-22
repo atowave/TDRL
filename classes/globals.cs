@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using MovingEngine.classes;
 using MovingEngine.levels;
 
@@ -20,6 +21,8 @@ namespace MovingEngine
         public const double default_step = 5;
         public static double step;
         public static Point mouse_position;
+        public static double fontSizeMultiplier;
+        public static DispatcherTimer gamelooptimer;
         public static MouseHandler MouseHandler = new MouseHandler();
         public static List<Projectile> projectiles = new List<Projectile>();
         public static Point Middlepoint { get {

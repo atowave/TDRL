@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace MovingEngine.classes
 {
     public class Projectile
     {
-        Canvas canvas;
+        Rectangle canvas;
         double[] Movement = new double[] { 0.0, 0.0 };
         Point pos = new Point(0, 0);
-        public Projectile(Canvas cn, Point origin) {
+        public Projectile(Rectangle cn, Point origin) {
             canvas = cn;
 
             Globals.canvas.Children.Add(cn);
@@ -24,7 +25,7 @@ namespace MovingEngine.classes
             Globals.projectiles.Add(this);
             Movement = new double[] { 1, 1 };
         }
-        public Projectile(Canvas cn, Point origin, double[] Movement1)
+        public Projectile(Rectangle cn, Point origin, double[] Movement1)
         {
             canvas = cn;
 

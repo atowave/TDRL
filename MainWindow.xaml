@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:MovingEngine"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="600" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Resources>
+        <FontFamily x:Key="FixedSys">pack://application:,,,/Resources/#Fixedsys Excelsior 3.01</FontFamily>
+    </Window.Resources>
     <Grid>
         
     </Grid>
