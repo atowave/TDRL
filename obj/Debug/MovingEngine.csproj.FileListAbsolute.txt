@@ -13,3 +13,10 @@ C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngi
 C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.csproj.CoreCompileInputs.cache
 C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.exe
 C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.pdb
+D:\TDRL\obj\Debug\MovingEngine.csprojAssemblyReference.cache
+D:\TDRL\obj\Debug\MainWindow.g.cs
+D:\TDRL\obj\Debug\App.g.cs
+D:\TDRL\obj\Debug\MovingEngine_MarkupCompile.cache
+D:\TDRL\obj\Debug\MovingEngine_MarkupCompile.lref
+D:\TDRL\obj\Debug\MovingEngine.exe
+D:\TDRL\obj\Debug\MovingEngine.pdb

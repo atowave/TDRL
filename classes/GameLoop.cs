@@ -21,7 +21,7 @@ namespace MovingEngine
             Moving();
             Collision.Walls();
             Weapons.Aim();
-            Globals.Debug.Content = "Current Top: " + Canvas.GetTop(Globals.currentLevel.canvas);
+            Globals.Debug.Content = "Current Top: " + Canvas.GetTop(Globals.currentLevel.Canvas);
             if (!Keyboard.IsKeyDown(Key.LeftShift)) Globals.step = Globals.default_step;
         }
 
@@ -35,21 +35,21 @@ namespace MovingEngine
                     switch (key)
                     {
                         case Key.W:
-                            Globals.currentLevel.public_location.Y += Globals.step;
+                            Globals.currentLevel.Public_location.Y += Globals.step;
                             Globals.player.UpdatePosition();
                             break;
 
                         case Key.S:
-                            Globals.currentLevel.public_location.Y -= Globals.step;
+                            Globals.currentLevel.Public_location.Y -= Globals.step;
                             Globals.player.UpdatePosition();
                             break;
 
                         case Key.A:
-                            Globals.currentLevel.public_location.X += Globals.step;
+                            Globals.currentLevel.Public_location.X += Globals.step;
                             Globals.player.UpdatePosition();
                             break;
                         case Key.D:
-                            Globals.currentLevel.public_location.X -= Globals.step;
+                            Globals.currentLevel.Public_location.X -= Globals.step;
                             Globals.player.UpdatePosition();
                             break;
                         case Key.LeftShift:

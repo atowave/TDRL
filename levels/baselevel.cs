@@ -10,18 +10,18 @@ using System.Windows.Media;
 
 namespace MovingEngine.levels
 {
-    public class baselevel
+    public class Baselevel
     {
         protected double[] lvlsize = new double[] { 500, 500 };
         protected Canvas levelground = new Canvas { Background = Brushes.White};
         protected Location location = new Location(0, 0);
         protected Location defaultlocation = new Location(0,0);
         
-        public Location public_location { get { return location; } }
-        public Canvas canvas { get { return levelground; } }
-        public Location defaultloc { get { return defaultlocation; } }
-        public double[] lvlsize_public { get { return lvlsize; } }
-        virtual public void start()
+        public Location Public_location { get { return location; } }
+        public Canvas Canvas { get { return levelground; } }
+        public Location Defaultloc { get { return defaultlocation; } }
+        public double[] Lvlsize_public { get { return lvlsize; } }
+        virtual public void Start()
         {
             levelground.Width = lvlsize[0];
             levelground.Height = lvlsize[1];

@@ -55,8 +55,8 @@ namespace MovingEngine
 
         private void LoadLevel()
         {
-            baselevel level1 = new level1();
-            level1.start();
+            Baselevel level1 = new level1();
+            level1.Start();
             level1.Bulid_Level();
         }
     }

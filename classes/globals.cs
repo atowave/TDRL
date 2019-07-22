@@ -15,7 +15,7 @@ namespace MovingEngine
     {
         public static Canvas canvas;
         public static Player player = new Player();
-        public static baselevel currentLevel;
+        public static Baselevel currentLevel;
         public static double default_step = 10;
         public static double step;
         public static Point mouse_position;
@@ -33,8 +33,8 @@ namespace MovingEngine
         public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {
-            Canvas.SetTop(Globals.currentLevel.canvas, Globals.currentLevel.public_location.Y);
-            Canvas.SetLeft(Globals.currentLevel.canvas, Globals.currentLevel.public_location.X);
+            Canvas.SetTop(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.Y);
+            Canvas.SetLeft(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.X);
         }
     }
     public class Location
