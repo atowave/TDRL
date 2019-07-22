@@ -15,7 +15,7 @@ namespace MovingEngine.classes
     {
         public static void Aim()
         {
-            Globals.player.rad = XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
+            Globals.player.rad = Mathfuncs.XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
             RotateTransform rotateTransform = new RotateTransform(Globals.player.rad, Globals.player.visual.Height / 2, Globals.player.visual.Height / 2);
             Globals.player.visual.RenderTransform = rotateTransform;
         }
@@ -37,59 +37,6 @@ namespace MovingEngine.classes
             double new_y = Math.Sqrt(Math.Pow(10, 2) * per_y);
             Debug.WriteLine(vec_x + " | " + vec_y);
             new Projectile(shoot_projectile, new Point(Globals.Middlepoint.X - 5, Globals.Middlepoint.Y - 5), new double[] { vec_x, vec_y, });
-        }
-        public static double XYToDegrees(double x, double y)
-        {
-            double ox = x;
-            double oy = y;
-            int plus = 0;
-            y *= -1;
-            if (x < 0)
-            {
-                plus = -90;
-            }
-            if (y < 0)
-            {
-                plus = 90;
-            }
-            if (x < 0 && y < 0)
-            {
-                plus = 180;
-            }
-            x = Math.Abs(x);
-            y = Math.Abs(y);
-            if (ox == 0 && oy == 0)
-            {
-                return 0;
-            }
-            if (ox == 0)
-            {
-                if (oy < 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 180;
-                }
-            }
-            if (oy == 0)
-            {
-                if (ox > 0)
-                {
-                    return 90;
-                }
-                else
-                {
-                    return 270;
-                }
-            }
-            double deg = Math.Asin(y / Math.Sqrt(x * x + y * y)) * (180 / Math.PI);
-            if (ox > 0 != oy > 0)
-            {
-                deg = 90 - deg;
-            }
-            return deg + plus;
         }
     }
 }
