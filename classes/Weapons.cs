@@ -22,8 +22,8 @@ namespace MovingEngine.classes
 
         public static void Shoot()
         {
-            Canvas shoot_projectile = new Canvas {
-                Background = Brushes.Red,
+            Rectangle shoot_projectile = new Rectangle {
+                Fill = Brushes.Red,
                 Width = 10,
                 Height = 40
             };
