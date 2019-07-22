@@ -34,7 +34,7 @@ namespace MovingEngine.levels
 
             Globals.currentLevel = this;
         }
-        virtual public void Bulid_Level()
+        virtual public void Build_Level()
         {
             return;
         }

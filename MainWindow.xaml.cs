@@ -1,4 +1,5 @@
-﻿using MovingEngine.levels;
+﻿using MovingEngine.classes;
+using MovingEngine.levels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -46,6 +47,8 @@ namespace MovingEngine
             gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
             gamelooptimer.Start();
             LoadLevel();
+
+            Collision.InitDebug();
         }
 
         private void MouseSaver(object sender, MouseEventArgs e)
@@ -57,7 +60,7 @@ namespace MovingEngine
         {
             Baselevel level1 = new level1();
             level1.Start();
-            level1.Bulid_Level();
+            level1.Build_Level();
         }
     }
 }

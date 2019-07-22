@@ -12,10 +12,10 @@ namespace MovingEngine.levels
     {
         public level1()
         {
-            lvlsize = new double[] { 800, 600 };
+            lvlsize = new double[] { 1500, 600 };
         }
 
-        public override void Bulid_Level()
+        public override void Build_Level()
         {
             LevelGrid grid = new LevelGrid();
             grid.SetContentPos(new LevelContent(Brushes.Black), 2, 2);
