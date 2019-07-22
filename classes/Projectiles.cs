@@ -29,7 +29,7 @@ namespace MovingEngine.classes
         {
             canvas = cn;
 
-            Globals.canvas.Children.Add(cn);
+            Globals.currentLevel.Canvas.Children.Add(cn);
             Canvas.SetLeft(cn, origin.X);
             Canvas.SetTop(cn, origin.Y);
             pos = origin;
