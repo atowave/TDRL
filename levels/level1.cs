@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace MovingEngine.levels
 {
-    class level1: baselevel
+    class level1: Baselevel
     {
         public level1()
         {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace MovingEngine.classes
 {
@@ -11,14 +13,13 @@ namespace MovingEngine.classes
     {
         public static void Aim()
         {
-
-            double line = Math.Sqrt(Math.Pow(globals.middlepoint.X - globals.mouse_position.X, 2) + Math.Pow(globals.middlepoint.Y - globals.mouse_position.Y, 2));
-            double gegen = Math.Sqrt(Math.Pow(globals.middlepoint.X - globals.mouse_position.X, 2) + Math.Pow(line - globals.mouse_position.Y, 2));
-            double rad = Math.Asin(gegen / line) * (90 / Math.PI);
+            double line = Math.Sqrt(Math.Pow(Globals.Middlepoint.X - Globals.mouse_position.X, 2) + Math.Pow(Globals.Middlepoint.Y - Globals.mouse_position.Y, 2));
+            double gegen = Math.Sqrt(Math.Pow(Globals.Middlepoint.X - Globals.mouse_position.X, 2) + Math.Pow(line - Globals.mouse_position.Y, 2));
+            double rad = Math.Sin(gegen / line) * 90 / Math.PI;
 
             Console.WriteLine(gegen);
             RotateTransform rotateTransform = new RotateTransform(rad, 45, 45);
-            globals.player.visual.RenderTransform = rotateTransform;
+            Globals.player.visual.RenderTransform = rotateTransform;
         }
         public static double XYToDegrees(double x, double y)
         {

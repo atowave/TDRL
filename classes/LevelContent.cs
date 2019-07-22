@@ -14,8 +14,8 @@ namespace MovingEngine
         public Dictionary<string, double[]> Grid = new Dictionary<string, double[]>();
         public LevelGrid(double Size = 10)
         {
-            double Columns = globals.currentLevel.lvlsize_public[0] / Size;
-            double Rows = globals.currentLevel.lvlsize_public[1] / Size;
+            double Columns = Globals.currentLevel.Lvlsize_public[0] / Size;
+            double Rows = Globals.currentLevel.Lvlsize_public[1] / Size;
 
             for (int r = 0; r < Rows; r++)
             {
@@ -31,7 +31,7 @@ namespace MovingEngine
             Canvas.SetTop(lvlcontent.sprite, postions[0]);
             Canvas.SetLeft(lvlcontent.sprite, postions[1]);
             Canvas.SetZIndex(lvlcontent.sprite, 1);
-            globals.currentLevel.canvas.Children.Add(lvlcontent.sprite);
+            Globals.currentLevel.Canvas.Children.Add(lvlcontent.sprite);
         }
     }
 

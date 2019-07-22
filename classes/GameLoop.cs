@@ -21,8 +21,8 @@ namespace MovingEngine
             Moving();
             Collision.Walls();
             Weapons.Aim();
-            globals.Debug.Content = "Current Top: " + Canvas.GetTop(globals.currentLevel.canvas);
-            if (!Keyboard.IsKeyDown(Key.LeftShift)) globals.step = globals.default_step;
+            Globals.Debug.Content = "Current Top: " + Canvas.GetTop(Globals.currentLevel.Canvas);
+            if (!Keyboard.IsKeyDown(Key.LeftShift)) Globals.step = Globals.default_step;
         }
 
         private void Moving()
@@ -35,25 +35,25 @@ namespace MovingEngine
                     switch (key)
                     {
                         case Key.W:
-                            globals.currentLevel.public_location.Y += globals.step;
-                            globals.player.UpdatePosition();
+                            Globals.currentLevel.Public_location.Y += Globals.step;
+                            Globals.player.UpdatePosition();
                             break;
 
                         case Key.S:
-                            globals.currentLevel.public_location.Y -= globals.step;
-                            globals.player.UpdatePosition();
+                            Globals.currentLevel.Public_location.Y -= Globals.step;
+                            Globals.player.UpdatePosition();
                             break;
 
                         case Key.A:
-                            globals.currentLevel.public_location.X += globals.step;
-                            globals.player.UpdatePosition();
+                            Globals.currentLevel.Public_location.X += Globals.step;
+                            Globals.player.UpdatePosition();
                             break;
                         case Key.D:
-                            globals.currentLevel.public_location.X -= globals.step;
-                            globals.player.UpdatePosition();
+                            Globals.currentLevel.Public_location.X -= Globals.step;
+                            Globals.player.UpdatePosition();
                             break;
                         case Key.LeftShift:
-                            globals.step = globals.default_step + 10;
+                            Globals.step = Globals.default_step + 10;
                             break;
                     }
                 }
