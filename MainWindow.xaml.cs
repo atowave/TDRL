@@ -26,21 +26,21 @@ namespace MovingEngine
         public MainWindow()
         {
             InitializeComponent();
-            globals.canvas = new Canvas { Background = Brushes.Black};
-            Content = globals.canvas;
+            Globals.canvas = new Canvas { Background = Brushes.Black};
+            Content = Globals.canvas;
             MouseMove += MouseSaver;
-            globals.canvas.Children.Add(globals.player.visual);
-            Canvas.SetZIndex(globals.player.visual, 2);
+            Globals.canvas.Children.Add(Globals.player.visual);
+            Canvas.SetZIndex(Globals.player.visual, 2);
             Show();
 
-            Canvas.SetTop(globals.player.visual, (globals.canvas.ActualHeight - globals.player.visual.ActualHeight) / 2);
-            Canvas.SetLeft(globals.player.visual, (globals.canvas.ActualWidth - globals.player.visual.ActualWidth) / 2);
-            globals.canvas.SizeChanged += (object sender, SizeChangedEventArgs g) =>
+            Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
+            Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
+            Globals.canvas.SizeChanged += (object sender, SizeChangedEventArgs g) =>
             {
-                Canvas.SetTop(globals.player.visual, (globals.canvas.ActualHeight - globals.player.visual.ActualHeight) / 2);
-                Canvas.SetLeft(globals.player.visual, (globals.canvas.ActualWidth - globals.player.visual.ActualWidth) / 2);
+                Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
+                Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
             };
-            globals.canvas.Children.Add(globals.Debug);
+            Globals.canvas.Children.Add(Globals.Debug);
 
             DispatcherTimer gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1)};
             gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
@@ -50,7 +50,7 @@ namespace MovingEngine
 
         private void MouseSaver(object sender, MouseEventArgs e)
         {
-            globals.mouse_position = e.GetPosition(this);
+            Globals.mouse_position = e.GetPosition(this);
         }
 
         private void LoadLevel()

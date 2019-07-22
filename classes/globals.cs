@@ -11,7 +11,7 @@ using MovingEngine.levels;
 
 namespace MovingEngine
 {
-    public static class globals
+    public static class Globals
     {
         public static Canvas canvas;
         public static Player player = new Player();
@@ -19,10 +19,10 @@ namespace MovingEngine
         public static double default_step = 10;
         public static double step;
         public static Point mouse_position;
-        public static Point middlepoint { get {
+        public static Point Middlepoint { get {
                 return new Point(
-                    globals.canvas.ActualWidth/2,
-                    globals.canvas.ActualHeight/2
+                    Globals.canvas.ActualWidth/2,
+                    Globals.canvas.ActualHeight/2
                 );
             } }
         public static Label Debug = new Label { Content = "Current Top Pos: ", Foreground = Brushes.White, FontSize = 50 };
@@ -30,11 +30,11 @@ namespace MovingEngine
     public class Player
     {
         public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Red };
-        public double height { get { return visual.ActualHeight; } }
+        public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {
-            Canvas.SetTop(globals.currentLevel.canvas, globals.currentLevel.public_location.Y);
-            Canvas.SetLeft(globals.currentLevel.canvas, globals.currentLevel.public_location.X);
+            Canvas.SetTop(Globals.currentLevel.canvas, Globals.currentLevel.public_location.Y);
+            Canvas.SetLeft(Globals.currentLevel.canvas, Globals.currentLevel.public_location.X);
         }
     }
     public class Location
@@ -46,12 +46,12 @@ namespace MovingEngine
             this.X = X;
             this.Y = Y;
         }
-        public void update(double x, double y)
+        public void Update(double x, double y)
         {
             this.X = x;
             Y = y;
         }
-        public Location copy()
+        public Location Copy()
         {
             return new Location(X, Y);
         }
