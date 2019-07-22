@@ -1,0 +1,15 @@
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\bin\Debug\MovingEngine.exe.config
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\bin\Debug\MovingEngine.exe
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\bin\Debug\MovingEngine.pdb
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.csprojAssemblyReference.cache
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MainWindow.g.cs
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\App.g.cs
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine_MarkupCompile.cache
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine_MarkupCompile.lref
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MainWindow.baml
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.g.resources
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.Properties.Resources.resources
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.csproj.GenerateResource.cache
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.csproj.CoreCompileInputs.cache
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.exe
+C:\Users\user.Michel\source\repos\MovingEngine\MovingEngine\obj\Debug\MovingEngine.pdb
