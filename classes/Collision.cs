@@ -35,6 +35,15 @@ namespace MovingEngine.classes
             visualPointsR = visualPoints.Select(x => new Location(x.X - Globals.currentLevel.Public_location.X, x.Y - Globals.currentLevel.Public_location.Y)).ToArray();
             Walls(visualPointsR);
             UpdateDebug(visualPoints);
+
+            if (visualPointsR.Any(x => Globals.currentLevel.objs.Any(y =>
+            {
+                return (x.X < (y.location.X + y.size.Width) && x.Y < (y.location.Y + y.size.Height)) &&
+                ((x.X) > y.location.X) && ((x.Y) > y.location.Y);
+            })))
+            {
+                Globals.player.UpdatePosition(Globals.player.lastLocation);
+            }
         }
         public static void Walls(Location[] visualPoints)
         {

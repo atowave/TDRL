@@ -50,7 +50,7 @@ namespace MovingEngine
 
         private void Moving()
         {
-            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.LeftShift};
+            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.LeftShift, Key.P};
             foreach (Key key in keys)
             {
                 if (Keyboard.IsKeyDown(key))
@@ -73,6 +73,9 @@ namespace MovingEngine
                             break;
                         case Key.LeftShift:
                             Globals.step = Globals.default_step + 10;
+                            break;
+                        case Key.P:
+                            Debug.WriteLine("PAUSE");
                             break;
                     }
                 }
