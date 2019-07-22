@@ -67,6 +67,7 @@
     <Compile Include="classes\GameLoop.cs" />
     <Compile Include="classes\globals.cs" />
     <Compile Include="classes\LevelContent.cs" />
+    <Compile Include="classes\Projectiles.cs" />
     <Compile Include="classes\Weapons.cs" />
     <Compile Include="levels\level1.cs" />
     <Compile Include="levels\baselevel.cs" />

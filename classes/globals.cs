@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using MovingEngine.classes;
 using MovingEngine.levels;
 
 namespace MovingEngine
@@ -19,6 +20,8 @@ namespace MovingEngine
         public static double default_step = 10;
         public static double step;
         public static Point mouse_position;
+        public static MouseHandler MouseHandler = new MouseHandler();
+        public static List<Projectile> projectiles = new List<Projectile>();
         public static Point Middlepoint { get {
                 return new Point(
                     Globals.canvas.ActualWidth/2,
@@ -30,6 +33,8 @@ namespace MovingEngine
     public class Player
     {
         public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Red };
+        public double ShootDelay = 10;
+        public double ShootDelayCurrent = 0;
         public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {
@@ -56,5 +61,10 @@ namespace MovingEngine
         {
             return new Location(X, Y);
         }
+    }
+    public class MouseHandler
+    {
+        public MouseButtonState Pressed = MouseButtonState.Released;
+        public MouseButton Button;
     }
 }

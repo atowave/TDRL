@@ -15,19 +15,41 @@ namespace MovingEngine
 {
     public class GameLoop
     {
-        Polyline radius;
+
         public GameLoop()
         {
             Moving();
+            Mouse_Action();
             Collision.Walls();
             Weapons.Aim();
+            foreach (Projectile projectile in Globals.projectiles)  projectile.Move();
             Globals.Debug.Content = "Current Top: " + Canvas.GetTop(Globals.currentLevel.Canvas);
             if (!Keyboard.IsKeyDown(Key.LeftShift)) Globals.step = Globals.default_step;
         }
 
+        private void Mouse_Action()
+        {
+            if (Globals.MouseHandler.Pressed == MouseButtonState.Pressed)
+            {
+                switch(Globals.MouseHandler.Button)
+                {
+                    case MouseButton.Left:
+                        if (Globals.player.ShootDelayCurrent == 0)
+                        {
+                            Weapons.Shoot();
+                            Globals.player.ShootDelayCurrent = Globals.player.ShootDelay;
+                        }
+                        break;
+
+                }
+            }
+            
+            if (Globals.player.ShootDelayCurrent != 0) Globals.player.ShootDelayCurrent--;
+        }
+
         private void Moving()
         {
-            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.LeftShift };
+            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.LeftShift};
             foreach (Key key in keys)
             {
                 if (Keyboard.IsKeyDown(key))
@@ -58,6 +80,12 @@ namespace MovingEngine
                     }
                 }
             }
+        }
+
+        public static void Mouse(object sender, MouseButtonEventArgs e)
+        {
+            Globals.MouseHandler.Pressed = e.ButtonState;
+            Globals.MouseHandler.Button = e.ChangedButton;
         }
     }
 }

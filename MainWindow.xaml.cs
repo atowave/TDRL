@@ -29,6 +29,8 @@ namespace MovingEngine
             Globals.canvas = new Canvas { Background = Brushes.Black};
             Content = Globals.canvas;
             MouseMove += MouseSaver;
+            MouseDown += GameLoop.Mouse;
+            MouseUp += (object sender, MouseButtonEventArgs e) => Globals.MouseHandler.Pressed = MouseButtonState.Released;
             Globals.canvas.Children.Add(Globals.player.visual);
             Canvas.SetZIndex(Globals.player.visual, 2);
             Show();
@@ -42,7 +44,7 @@ namespace MovingEngine
             };
             Globals.canvas.Children.Add(Globals.Debug);
 
-            DispatcherTimer gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1)};
+            DispatcherTimer gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
             gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
             gamelooptimer.Start();
             LoadLevel();
