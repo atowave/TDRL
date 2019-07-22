@@ -36,6 +36,7 @@ namespace MovingEngine
             Canvas.SetTop(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.Y);
             Canvas.SetLeft(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.X);
         }
+        public double rad = 0;
     }
     public class Location
     {

@@ -13,14 +13,14 @@ namespace MovingEngine.classes
     {
         public static void Aim()
         {
-            double line = Math.Sqrt(Math.Pow(Globals.Middlepoint.X - Globals.mouse_position.X, 2) + Math.Pow(Globals.Middlepoint.Y - Globals.mouse_position.Y, 2));
-            double gegen = Math.Sqrt(Math.Pow(Globals.Middlepoint.X - Globals.mouse_position.X, 2) + Math.Pow(line - Globals.mouse_position.Y, 2));
-            double rad = Math.Sin(gegen / line) * 90 / Math.PI;
+            Globals.player.rad = XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
 
-            Console.WriteLine(gegen);
+            Console.WriteLine(rad);
             RotateTransform rotateTransform = new RotateTransform(rad, 45, 45);
             Globals.player.visual.RenderTransform = rotateTransform;
         }
+
+        public static 
         public static double XYToDegrees(double x, double y)
         {
             double ox = x;
