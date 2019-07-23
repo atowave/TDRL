@@ -43,7 +43,7 @@ namespace MovingEngine.classes
         public static List<ItemBase> items = new List<ItemBase>()
         {
             new WeaponItem(100, "Default Gun", 8, 12, 20, a => { }),
-            new WeaponItem(33, "Sniper", 45, 100, 60, a => { }),
+            new WeaponItem(33, "Sniper Rifle", 45, 100, 60, a => { }),
             new WeaponItem(33, "Lasergun", 0, 2, 50, a => { }) { projectileLength = 80 },
             new WeaponItem(50, "Shotgun", 25, 8, 12, a => {
                 Projectile p2 = a.copy();
@@ -115,7 +115,7 @@ namespace MovingEngine.classes
         }
         public override void OnItemEquip()
         {
-            base.OnItemEquip();
+            Weapons.equipped = this;
         }
     }
 }

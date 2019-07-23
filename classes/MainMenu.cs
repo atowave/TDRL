@@ -71,6 +71,65 @@ namespace MovingEngine.classes
             Globals.canvas.Children.Remove(Menu);
             Globals.gamelooptimer.Start();
         }
+        static ItemBase item;
+
+        internal static void LootMenu()
+        {
+            Menu = new Canvas { Background = new SolidColorBrush { Color = Color.FromArgb(127, 0, 0, 0) }, Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth };
+            Canvas.SetZIndex(Menu, 3);
+            Globals.canvas.Children.Add(Menu);
+            item = ItemBase.GetRandomItem();
+            Label Text = new Label
+            {
+                Content = "You just found a " + item.name.ToUpper() + "!\n\nDo you want to equip it? It might override a currently equipped item.",
+                Foreground = Brushes.Yellow,
+                FontSize = 50 * Globals.fontSizeMultiplier,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Width = Globals.canvas.ActualWidth
+            };
+            Canvas.SetTop(Text, Globals.canvas.ActualHeight * 0.2);
+            Menu.Children.Add(Text);
+            Button YES = new Button
+            {
+                Content = "YES",
+                FontSize = 100 * Globals.fontSizeMultiplier,
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent,
+                Foreground = Brushes.LightGreen
+            };
+            Button NO = new Button
+            {
+                Content = "NO",
+                FontSize = 100 * Globals.fontSizeMultiplier,
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent,
+                Foreground = Brushes.IndianRed
+            };
+            Canvas.SetLeft(YES, Globals.canvas.ActualWidth * 0.35);
+            Canvas.SetRight(NO, Globals.canvas.ActualWidth * 0.35);
+            Canvas.SetTop(YES, Globals.canvas.ActualHeight * 0.7);
+            Canvas.SetTop(NO, Globals.canvas.ActualHeight * 0.7);
+
+            Menu.Children.Add(YES);
+            Menu.Children.Add(NO);
+
+            YES.Click += YES_Click;
+            NO.Click += NO_Click;
+        }
+
+        private static void NO_Click(object sender, RoutedEventArgs e)
+        {
+            Globals.canvas.Children.Remove(Menu);
+            BetweenLevels(1);
+        }
+
+        private static void YES_Click(object sender, RoutedEventArgs e)
+        {
+            item.OnItemEquip();
+            Globals.canvas.Children.Remove(Menu);
+            BetweenLevels(1);
+        }
 
         internal static void BetweenLevels(int i)
         {
@@ -82,7 +141,7 @@ namespace MovingEngine.classes
             {
                 Content = (i == 1 ? "Stage " + ((int)Globals.player.currentStage - 1) + " cleared" : "Stage failed!"),
                 Foreground = (i == 1 ? Brushes.Green : Brushes.Red),
-                FontSize = 100 * Globals.fontSizeMultiplier
+                FontSize = 100 * Globals.fontSizeMultiplier,
             };
             Button Start = new Button
             {

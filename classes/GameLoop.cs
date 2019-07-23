@@ -48,13 +48,21 @@ namespace MovingEngine
                 Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
             } else if (i == 2) {
                 Globals.player.currentStage = 1;
+                Weapons.equipped = (WeaponItem)ItemBase.items.First(x => x.name == "Default Gun");
                 Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
             }
             Globals.currentLevel = null;
             Globals.gamelooptimer.Stop();
             Globals.player.HP = Globals.player.baseHP;
             new Level();
-            if (i != 0) MainMenu.BetweenLevels(i);
+            if (i == 1 && ((Globals.player.currentStage - 1) % 5 == 0) && Globals.player.currentStage != 1)
+            {
+                MainMenu.LootMenu();
+            } else
+            {
+                if (i != 0)
+                    MainMenu.BetweenLevels(i);
+            }
         }
 
         private void Mouse_Action()
