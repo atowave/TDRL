@@ -35,13 +35,31 @@ namespace MovingEngine.classes
             visualPointsR = visualPoints.Select(x => new Location(x.X - Globals.currentLevel.Public_location.X, x.Y - Globals.currentLevel.Public_location.Y)).ToArray();
             Walls(visualPointsR);
             UpdateDebug(visualPoints);
-        }
-        public static void Walls(Location[] visualPoints)
-        {
-            if(visualPoints.Any(x => x.X < 0 || x.Y < 0 || x.X > Globals.currentLevel.Lvlsize_public[0] || x.Y > Globals.currentLevel.Lvlsize_public[1]))
+
+            if (Colliding(visualPointsR))
             {
                 Globals.player.UpdatePosition(Globals.player.lastLocation);
             }
+        }
+        public static bool Colliding(Location[] visualPoints)
+        {
+            return Walls(visualPoints) || Objects(visualPoints);
+        }
+        public static bool Walls(Location[] visualPoints)
+        {
+            return (visualPoints.Any(x => x.X < 0 || x.Y < 0 || x.X > Globals.currentLevel.Lvlsize_public[0] || x.Y > Globals.currentLevel.Lvlsize_public[1]));
+        }
+        public static bool Enmeys(Location[] visualPoints)
+        {
+            return visualPoints.Any(x => Globals.currentLevel.enemies.Any(y => Math.Sqrt((Math.Abs(x.X) - Math.Abs(y.location.X)) + (Math.Abs(x.Y) - Math.Abs(y.location.Y))) < y.hitboxRadius));
+        }
+        public static bool Objects(Location[] visualPoints)
+        {
+            return visualPoints.Any(x => Globals.currentLevel.objs.Any(y =>
+            {
+                return (x.X < (y.location.X + y.size.Width) && x.Y < (y.location.Y + y.size.Height)) &&
+                ((x.X) > y.location.X) && ((x.Y) > y.location.Y);
+            }));
         }
         public static void UpdateDebug(Location[] visualPoints)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovingEngine.classes;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace MovingEngine.levels
 {
     public class Baselevel
     {
+        public List<Enemy> enemies = new List<Enemy>();
+        public List<LevelObj> objs = new List<LevelObj>();
         protected double[] lvlsize = new double[] { 500, 500 };
         protected Canvas levelground = new Canvas { Background = Brushes.White};
         protected Location location = new Location(0, 0);

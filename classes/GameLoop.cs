@@ -20,7 +20,7 @@ namespace MovingEngine
         {
             Moving();
             Mouse_Action();
-            foreach (Projectile projectile in Globals.projectiles)  projectile.Move();
+            foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
             Collision.CheckCollision();
             Weapons.Aim();
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.Canvas) + " | " + Canvas.GetTop(Globals.currentLevel.Canvas) + "], " + Globals.player.rad + "°";
@@ -50,7 +50,7 @@ namespace MovingEngine
 
         private void Moving()
         {
-            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.F3};
+            Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.F3, Key.P};
             foreach (Key key in keys)
             {
                 if (Keyboard.IsKeyDown(key))
@@ -73,6 +73,8 @@ namespace MovingEngine
                             break;
                         case Key.F3:
                             if (!Globals.canvas.Children.Contains(Globals.Debug))Globals.canvas.Children.Add(Globals.Debug);
+                        case Key.P:
+                            Debug.WriteLine("PAUSE");
                             break;
                     }
                 }

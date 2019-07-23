@@ -64,7 +64,7 @@ namespace MovingEngine
 
         private void LoadLevel()
         {
-            Baselevel level1 = new level1();
+            Baselevel level1 = new Level1();
             level1.Start();
             level1.Build_Level();
         }
