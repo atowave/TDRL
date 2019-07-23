@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\Collision.cs" />
+    <Compile Include="classes\Enemy.cs" />
     <Compile Include="classes\GameLoop.cs" />
     <Compile Include="classes\globals.cs" />
     <Compile Include="classes\LevelContent.cs" />

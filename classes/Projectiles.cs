@@ -44,6 +44,13 @@ namespace MovingEngine.classes
             pos.Y = pos.Y + Movement[1];
             Canvas.SetLeft(canvas, pos.X);
             Canvas.SetTop(canvas, pos.Y);
+
+            Location center = new Location(Canvas.GetLeft(canvas) + (canvas.Width / 2), Canvas.GetTop(canvas) + (canvas.Height / 2));
+            if (Collision.Colliding(new[] { center }))
+            {
+                Globals.projectiles.Remove(this);
+                Globals.currentLevel.Canvas.Children.Remove(canvas);
+            }
         }
     }
 }
