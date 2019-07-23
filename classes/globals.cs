@@ -58,12 +58,13 @@ namespace MovingEngine
     }
     public class Player
     {
-        public const int baseHP = 180;
-        public int HP = baseHP;
+        public int baseHP = 180;
+        public int HP;
         public Location lastLocation = new Location(0, 0);
         public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue };
         public double ShootDelay = 10;
         public double ShootDelayCurrent = 0;
+        public double currentStage;
         public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {

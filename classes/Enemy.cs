@@ -28,7 +28,7 @@ namespace MovingEngine.classes
         public FrameworkElement sprite;
         public double hitboxRadius = 40;
         public double rotation = 0;
-        public double AI_Threshold = 100;
+        public double AI_Threshold = 200;
         public double AI_Speed = 2.5;
         public double HP = 100;
         public double wait;
@@ -41,6 +41,7 @@ namespace MovingEngine.classes
 
             Canvas.SetLeft(sprite, origin.X);
             Canvas.SetTop(sprite, origin.Y);
+            Canvas.SetZIndex(sprite, 1);
 
             wait = 60;
 

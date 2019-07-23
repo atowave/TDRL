@@ -37,16 +37,30 @@ namespace MovingEngine.levels
             for(int range = 0; range < Globals.random.Next(5, 15); range++)
             {
                 int rand = Globals.random.Next(0, 100);
-                if (rand < 50) {
-                    new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle { Fill = Brushes.Red, Width=Lvlsize_public[0]/100*5, Height= Lvlsize_public[0] / 100 * 5 }, 40, Globals.random.Next(100, 1000));
+                if (rand < 35 && Globals.currentLevel.enemies.Count < Globals.player.currentStage) {
+                    new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle { Fill = Brushes.Red, Width=Lvlsize_public[0]/100*5, Height= Lvlsize_public[0] / 100 * 5 }, 40, Globals.random.Next(100, 100*(int)(Globals.player.currentStage/5) +100));
                 } else
                 {
-                    double size_x = Lvlsize_public[0] / 100 * Globals.random.Next(2, 10);
-                    double size_y = Lvlsize_public[1] / 100 * Globals.random.Next(5, 10);
+                    double size_x = Lvlsize_public[0] / 100 * Globals.random.Next(5, 20);
+                    double size_y = Lvlsize_public[1] / 100 * Globals.random.Next(5, 20);
                     Size size = new Size((size_x < Globals.player.visual.Width ? Globals.player.visual.Width : size_x), (size_y < Globals.player.visual.Height ? Globals.player.visual.Height : size_y));
-                    new LevelObj(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), size, Brushes.Black);
+                    Location loc = new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1]));
+
+                    new LevelObj(loc, size, Brushes.Black);
                 }
             }
+            if (Collision.Objects(Collision.convertToRelative(Collision.GetVisualPoints())))
+            {
+                LevelObj lo = Collision.GetObject(Collision.convertToRelative(Collision.GetVisualPoints()));
+                Globals.currentLevel.canvas.Children.Remove(lo.rect);
+                Globals.currentLevel.objs.Remove(lo);
+            }
+
+            if (Globals.currentLevel.enemies.Count == 0)
+            {
+                new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle { Fill = Brushes.Red, Width = Lvlsize_public[0] / 100 * 5, Height = Lvlsize_public[0] / 100 * 5 }, 40, Globals.random.Next(100, 100));
+            }
+            
         }
     }
 }

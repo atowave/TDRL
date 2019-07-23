@@ -1,4 +1,5 @@
 ﻿using MovingEngine.classes;
+using MovingEngine.levels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,7 +23,7 @@ namespace MovingEngine
             Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
             if (Globals.currentLevel.enemies.Count == 0)
             {
-                Endgame(false);
+                rungame(1);
             }
 
             Moving();
@@ -36,9 +37,21 @@ namespace MovingEngine
             Globals.step = Globals.default_step;
         }
 
-        private void Endgame(bool v)
+        public static void rungame(int i)
         {
+            if (i == 1)
+            {
+                Globals.player.currentStage++;
+                Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
+            } else if (i == 2) {
+                Globals.player.currentStage = 1;
+                Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
+            }
+            Globals.currentLevel = null;
             Globals.gamelooptimer.Stop();
+            Globals.player.HP = Globals.player.baseHP;
+            new Level();
+            MainMenu.Start();
         }
 
         private void Mouse_Action()

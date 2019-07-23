@@ -20,7 +20,7 @@ namespace MovingEngine.classes
         }
         public static List<ItemBase> items = new List<ItemBase>()
         {
-            new WeaponItem("Default Gun", 10, 10, 20, a => { }),
+            new WeaponItem("Default Gun", 8, 12, 20, a => { }),
             new WeaponItem("Sniper", 45, 100, 60, a => { }),
             new WeaponItem("Lasergun", 2, 2, 8, a => { }),
             new WeaponItem("Shotgun", 25, 8, 12, a => {

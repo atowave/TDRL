@@ -32,7 +32,7 @@ namespace MovingEngine.classes
         public static void CheckCollision()
         {
             Location[] visualPoints = GetVisualPoints();
-            visualPointsR = visualPoints.Select(x => new Location(x.X - Globals.currentLevel.Public_location.X, x.Y - Globals.currentLevel.Public_location.Y)).ToArray();
+            visualPointsR = convertToRelative(visualPoints);
             Walls(visualPointsR);
             UpdateDebug(visualPoints);
 
@@ -46,6 +46,10 @@ namespace MovingEngine.classes
                 Globals.DmgInd(1, Globals.player.HP, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
             }
         }
+        public static Location[] convertToRelative(Location[] visualPoints)
+        {
+            return visualPoints.Select(x => new Location(x.X - Globals.currentLevel.Public_location.X, x.Y - Globals.currentLevel.Public_location.Y)).ToArray();
+        } 
         public static bool Colliding(Location[] visualPoints)
         {
             return Walls(visualPoints) || Objects(visualPoints);
@@ -62,6 +66,16 @@ namespace MovingEngine.classes
         {
             Location l = visualPoints.First(x => Globals.currentLevel.enemies.Any(y => Math.Sqrt(Math.Pow(Math.Abs(x.X) - Math.Abs(y.location.X), 2) + Math.Pow(Math.Abs(x.Y) - Math.Abs(y.location.Y), 2)) < y.hitboxRadius));
             return Globals.currentLevel.enemies.First(y => Math.Sqrt(Math.Pow(Math.Abs(l.X) - Math.Abs(y.location.X), 2) + Math.Pow(Math.Abs(l.Y) - Math.Abs(y.location.Y), 2)) < y.hitboxRadius);
+        }
+        public static LevelObj GetObject(Location[] visualPoints)
+        {
+            Location l = visualPoints.First(x => Globals.currentLevel.objs.Any(y =>
+            {
+                return (x.X < (y.location.X + y.size.Width) && x.Y < (y.location.Y + y.size.Height)) &&
+                ((x.X) > y.location.X) && ((x.Y) > y.location.Y);
+            }));
+            return Globals.currentLevel.objs.First(y => (l.X < (y.location.X + y.size.Width) && l.Y < (y.location.Y + y.size.Height)) &&
+                ((l.X) > y.location.X) && ((l.Y) > y.location.Y));
         }
         public static bool Objects(Location[] visualPoints)
         {

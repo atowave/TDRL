@@ -14,14 +14,14 @@ namespace MovingEngine.classes
     static class MainMenu
     {
         static Canvas Menu;
-        public static void Start(MainWindow main)
+        public static void Start()
         {
             Menu = new Canvas { Background = new SolidColorBrush { Color = Color.FromArgb(127, 0, 0, 0) }, Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth };
             Canvas.SetZIndex(Menu, 3);
 
             Button Start = new Button
             {
-                Content = "START STAGE",
+                Content = "START STAGE "+Globals.player.currentStage,
                 FontSize = 100 * Globals.fontSizeMultiplier,
                 Background = Brushes.Transparent,
                 BorderBrush = Brushes.Transparent,

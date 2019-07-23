@@ -76,8 +76,10 @@ namespace MovingEngine.classes
             {
                 Globals.player.HP -= (int)dmg;
                 Globals.DmgInd((int)dmg, 0, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
+                
                 Globals.projectiles.Remove(this);
                 Globals.currentLevel.canvas.Children.Remove(canvas);
+                if (Globals.player.HP <= 0) GameLoop.rungame(2);
             }
         }
     }

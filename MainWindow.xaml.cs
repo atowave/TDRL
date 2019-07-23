@@ -68,10 +68,11 @@ namespace MovingEngine
                 Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
             };
             GameLoop loop = new GameLoop();
-            Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
+            Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000 / 60)};
             Globals.gamelooptimer.Tick += (object sender, EventArgs e) => loop.loop();
-            new Level();
-            MainMenu.Start(this);
+
+            Globals.player.currentStage = 1;
+            GameLoop.rungame(0);
 
             Collision.InitDebug();
         }
