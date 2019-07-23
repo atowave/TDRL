@@ -36,7 +36,7 @@ namespace MovingEngine.classes
             np.canvas = new Rectangle { Height = canvas.Height, Width = canvas.Width, Fill = canvas.Fill };
             Canvas.SetLeft(np.canvas, Canvas.GetLeft(canvas));
             Canvas.SetTop(np.canvas, Canvas.GetTop(canvas));
-            Globals.currentLevel.Canvas.Children.Add(np.canvas);
+            Globals.currentLevel.canvas.Children.Add(np.canvas);
             np.canvas.RenderTransform = new RotateTransform(((RotateTransform)canvas.RenderTransform).Angle, ((RotateTransform)canvas.RenderTransform).CenterX, ((RotateTransform)canvas.RenderTransform).CenterY);
             return np;
         }
@@ -77,7 +77,7 @@ namespace MovingEngine.classes
                 Globals.player.HP -= (int)dmg;
                 Globals.DmgInd((int)dmg, 0, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
                 Globals.projectiles.Remove(this);
-                Globals.currentLevel.Canvas.Children.Remove(canvas);
+                Globals.currentLevel.canvas.Children.Remove(canvas);
             }
         }
     }
