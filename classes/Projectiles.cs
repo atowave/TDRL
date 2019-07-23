@@ -13,23 +13,14 @@ namespace MovingEngine.classes
     {
         Rectangle canvas;
         double[] Movement = new double[] { 0.0, 0.0 };
+        bool enemy;
         Point pos = new Point(0, 0);
-        public double dmg = 10;
-        public Projectile(Rectangle cn, Point origin) {
-            canvas = cn;
-
-            Globals.canvas.Children.Add(cn);
-            Canvas.SetLeft(cn, origin.X);
-            Canvas.SetTop(cn, origin.Y);
-            pos = origin;
-
-            Globals.projectiles.Add(this);
-            Movement = new double[] { 1, 1 };
-        }
-        public Projectile(Rectangle cn, Point origin, double[] Movement1)
+        double dmg;
+        public Projectile(Rectangle cn, Point origin, double[] Movement1, bool enemy = false, double dmg = 10)
         {
             canvas = cn;
-
+            this.enemy = enemy;
+            this.dmg = dmg;
             Globals.currentLevel.Canvas.Children.Add(cn);
             Canvas.SetLeft(cn, origin.X);
             Canvas.SetTop(cn, origin.Y);
@@ -38,7 +29,10 @@ namespace MovingEngine.classes
             Globals.projectiles.Add(this);
             Movement = Movement1;
         }
-
+        public Projectile copy()
+        {
+            return (Projectile)this.MemberwiseClone();
+        }
         public void Move()
         {
             pos.X = pos.X + Movement[0];
@@ -52,7 +46,7 @@ namespace MovingEngine.classes
                 Globals.projectiles.Remove(this);
                 Globals.currentLevel.Canvas.Children.Remove(canvas);
             }
-            if (Collision.Enemys(new[] { center }))
+            if (Collision.Enemys(new[] { center }) && !enemy)
             {
                 Enemy e = Collision.GetEnemy(new[] { center });
                 e.HP -= dmg;

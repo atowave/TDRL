@@ -18,6 +18,11 @@ namespace MovingEngine
 
         public void loop()
         {
+            if (Globals.currentLevel.enemies.Count == 0)
+            {
+                Endgame(false);
+            }
+
             Moving();
             Mouse_Action();
             foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
@@ -27,6 +32,11 @@ namespace MovingEngine
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.Canvas) + " | " + Canvas.GetTop(Globals.currentLevel.Canvas) + "], " + Globals.player.rad + "°";
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
             Globals.step = Globals.default_step;
+        }
+
+        private void Endgame(bool v)
+        {
+            Globals.gamelooptimer.Stop();
         }
 
         private void Mouse_Action()

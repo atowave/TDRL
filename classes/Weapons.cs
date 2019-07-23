@@ -23,7 +23,7 @@ namespace MovingEngine.classes
         public static void Shoot()
         {
             Rectangle shoot_projectile = new Rectangle {
-                Fill = Brushes.Red,
+                Fill = Brushes.Blue,
                 Width = 10,
                 Height = 40
             };

@@ -49,7 +49,7 @@ namespace MovingEngine.classes
                 Canvas.SetTop(Start, (Menu.Height - Start.ActualHeight) / 2);
                 Canvas.SetLeft(Start, (Menu.Width - Start.ActualWidth) / 2);
 
-                main.Show();
+                Globals.canvas.Children.Remove(Globals.loading);
             };
             dt.Start();
         }

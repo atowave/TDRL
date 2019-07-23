@@ -36,6 +36,7 @@ namespace MovingEngine
         }
 
         public static Canvas canvas;
+        public static GameLoop loop = new GameLoop();
         public static Player player = new Player();
         public static Baselevel currentLevel;
         public const double default_step = 7.5;
@@ -46,6 +47,7 @@ namespace MovingEngine
         public static DispatcherTimer gamelooptimer;
         public static MouseHandler MouseHandler = new MouseHandler();
         public static List<Projectile> projectiles = new List<Projectile>();
+        public static Canvas loading;
         public static Point Middlepoint { get {
                 return new Point(
                     Globals.canvas.ActualWidth/2,
