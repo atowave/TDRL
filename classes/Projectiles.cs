@@ -21,7 +21,7 @@ namespace MovingEngine.classes
             canvas = cn;
             this.enemy = enemy;
             this.dmg = dmg;
-            Globals.currentLevel.Canvas.Children.Add(cn);
+            Globals.currentLevel.canvas.Children.Add(cn);
             Canvas.SetLeft(cn, origin.X);
             Canvas.SetTop(cn, origin.Y);
             pos = origin;
@@ -44,15 +44,18 @@ namespace MovingEngine.classes
             if (Collision.Colliding(new[] { center }))
             {
                 Globals.projectiles.Remove(this);
-                Globals.currentLevel.Canvas.Children.Remove(canvas);
+                Globals.currentLevel.canvas.Children.Remove(canvas);
             }
             if (Collision.Enemys(new[] { center }) && !enemy)
             {
                 Enemy e = Collision.GetEnemy(new[] { center });
-                e.HP -= dmg;
-                Globals.DmgInd((int)dmg, (int)e.HP, true, new Location(e.location.X - 25, e.location.Y - 75));
-                Globals.projectiles.Remove(this);
-                Globals.currentLevel.Canvas.Children.Remove(canvas);
+                if (e.wait == 0)
+                {
+                    e.HP -= dmg;
+                    Globals.DmgInd((int)dmg, (int)e.HP, true, new Location(e.location.X - 25, e.location.Y - 75));
+                    Globals.projectiles.Remove(this);
+                    Globals.currentLevel.canvas.Children.Remove(canvas);
+                }
             }
         }
     }

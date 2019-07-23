@@ -70,7 +70,7 @@ namespace MovingEngine
             GameLoop loop = new GameLoop();
             Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
             Globals.gamelooptimer.Tick += (object sender, EventArgs e) => loop.loop();
-            LoadLevel();
+            new Level();
             MainMenu.Start(this);
 
             Collision.InitDebug();
@@ -79,13 +79,6 @@ namespace MovingEngine
         private void MouseSaver(object sender, MouseEventArgs e)
         {
             Globals.mouse_position = e.GetPosition(this);
-        }
-
-        private void LoadLevel()
-        {
-            Baselevel level1 = new Level1();
-            level1.Start();
-            level1.Build_Level();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MovingEngine.classes
             Canvas.SetLeft(rect, location.X);
             Canvas.SetTop(rect, location.Y);
 
-            Globals.currentLevel.Canvas.Children.Add(rect);
+            Globals.currentLevel.canvas.Children.Add(rect);
             Globals.currentLevel.objs.Add(this);
         }
     }

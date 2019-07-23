@@ -22,7 +22,7 @@ namespace MovingEngine
             Canvas.SetLeft(dmglabel, location.X + random.Next(-32, 33));
             Canvas.SetTop(dmglabel, location.Y);
 
-            Globals.currentLevel.Canvas.Children.Add(dmglabel);
+            Globals.currentLevel.canvas.Children.Add(dmglabel);
 
             DoubleAnimation opacity = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(1)), FillBehavior.HoldEnd);
             DoubleAnimation ypos = new DoubleAnimation(location.Y, location.Y - 100, new Duration(TimeSpan.FromSeconds(1)), FillBehavior.HoldEnd);
@@ -31,14 +31,14 @@ namespace MovingEngine
 
             ypos.Completed += (a, b) =>
             {
-                Globals.currentLevel.Canvas.Children.Remove(dmglabel);
+                Globals.currentLevel.canvas.Children.Remove(dmglabel);
             };
         }
 
         public static Canvas canvas;
         public static GameLoop loop = new GameLoop();
         public static Player player = new Player();
-        public static Baselevel currentLevel;
+        public static Level currentLevel;
         public const double default_step = 7.5;
         public static double step;
         public static Point mouse_position;
@@ -61,20 +61,20 @@ namespace MovingEngine
         public const int baseHP = 180;
         public int HP = baseHP;
         public Location lastLocation = new Location(0, 0);
-        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Red };
+        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue };
         public double ShootDelay = 10;
         public double ShootDelayCurrent = 0;
         public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {
-            lastLocation = new Location(Canvas.GetLeft(Globals.currentLevel.Canvas), Canvas.GetTop(Globals.currentLevel.Canvas));
-            Canvas.SetTop(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.Y);
-            Canvas.SetLeft(Globals.currentLevel.Canvas, Globals.currentLevel.Public_location.X);
+            lastLocation = new Location(Canvas.GetLeft(Globals.currentLevel.canvas), Canvas.GetTop(Globals.currentLevel.canvas));
+            Canvas.SetTop(Globals.currentLevel.canvas, Globals.currentLevel.Public_location.Y);
+            Canvas.SetLeft(Globals.currentLevel.canvas, Globals.currentLevel.Public_location.X);
         }
         public void UpdatePosition(Location newPos)
         {
-            Canvas.SetTop(Globals.currentLevel.Canvas, newPos.Y);
-            Canvas.SetLeft(Globals.currentLevel.Canvas, newPos.X);
+            Canvas.SetTop(Globals.currentLevel.canvas, newPos.Y);
+            Canvas.SetLeft(Globals.currentLevel.canvas, newPos.X);
             Globals.currentLevel.Public_location.X = newPos.X;
             Globals.currentLevel.Public_location.Y = newPos.Y;
         }

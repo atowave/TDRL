@@ -18,7 +18,9 @@ namespace MovingEngine
 
         public void loop()
         {
-            if (Globals.currentLevel.enemies.Count == 0)
+            Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
+            Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
+            if (Globals.currentLevel.enemies.Count == 0 && false)
             {
                 Endgame(false);
             }
@@ -29,7 +31,7 @@ namespace MovingEngine
             foreach (Enemy enemy in Globals.currentLevel.enemies.ToArray()) enemy.AI();
             Collision.CheckCollision();
             Weapons.Aim();
-            Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.Canvas) + " | " + Canvas.GetTop(Globals.currentLevel.Canvas) + "], " + Globals.player.rad + "°";
+            Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], " + Globals.player.rad + "°";
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
             Globals.step = Globals.default_step;
         }

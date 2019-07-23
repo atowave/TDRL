@@ -67,7 +67,7 @@
     <Compile Include="classes\Enemy.cs" />
     <Compile Include="classes\GameLoop.cs" />
     <Compile Include="classes\globals.cs" />
-    <Compile Include="classes\LevelContent.cs" />
+    <Compile Include="classes\ItemBase.cs" />
     <Compile Include="classes\LevelObj.cs" />
     <Compile Include="classes\MainMenu.cs" />
     <Compile Include="classes\Projectiles.cs" />
@@ -75,8 +75,7 @@
     <Compile Include="classes\SourcedImage.cs" />
     <Compile Include="classes\Weapons.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="levels\level1.cs" />
-    <Compile Include="levels\baselevel.cs" />
+    <Compile Include="classes\LevelGen.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
