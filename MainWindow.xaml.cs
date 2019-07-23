@@ -54,6 +54,35 @@ namespace MovingEngine
             Canvas.SetRight(Loading, 0);
             Canvas.SetZIndex(Globals.loading, 1000);
 
+            Rectangle hpouter = new Rectangle { Fill = Brushes.Black, Height = 90, Width = SystemParameters.VirtualScreenWidth - 20 };
+            Rectangle hpborder = new Rectangle { Fill = Brushes.White, Height = 70, Width = SystemParameters.VirtualScreenWidth - 40 };
+            Rectangle hpinner = new Rectangle { Fill = Brushes.Red, Height = 50, Width = SystemParameters.VirtualScreenWidth - 60 };
+
+            Globals.hpbar = hpinner;
+            Globals.hpbarlength = (int)hpinner.Width;
+
+            Canvas.SetLeft(hpouter, 10);
+            Canvas.SetLeft(hpborder, 20);
+            Canvas.SetLeft(hpinner, 30);
+            Canvas.SetTop(hpouter, 10);
+            Canvas.SetTop(hpborder, 20);
+            Canvas.SetTop(hpinner, 30);
+            Canvas.SetZIndex(hpouter, 5);
+            Canvas.SetZIndex(hpborder, 5);
+            Canvas.SetZIndex(hpinner, 5);
+            Globals.canvas.Children.Add(hpouter);
+            Globals.canvas.Children.Add(hpborder);
+            Globals.canvas.Children.Add(hpinner);
+
+            Label hptext = new Label { Height = 50, Width = SystemParameters.VirtualScreenWidth - 60, Foreground = Brushes.Black, Content = "0 / 0", HorizontalContentAlignment = HorizontalAlignment.Center, FontSize = 32 * Globals.fontSizeMultiplier };
+            Canvas.SetLeft(hptext, 30);
+            Canvas.SetTop(hptext, 30);
+
+            Globals.hptext = hptext;
+            Canvas.SetZIndex(hptext, 5);
+
+            Globals.canvas.Children.Add(hptext);
+
             MouseMove += MouseSaver;
             MouseDown += GameLoop.Mouse;
             MouseUp += (object sender, MouseButtonEventArgs e) => Globals.MouseHandler.Pressed = MouseButtonState.Released;

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using MovingEngine.classes;
 using MovingEngine.levels;
@@ -48,6 +49,9 @@ namespace MovingEngine
         public static MouseHandler MouseHandler = new MouseHandler();
         public static List<Projectile> projectiles = new List<Projectile>();
         public static Canvas loading;
+        public static Rectangle hpbar;
+        public static Label hptext;
+        public static int hpbarlength;
         public static Point Middlepoint { get {
                 return new Point(
                     Globals.canvas.ActualWidth/2,

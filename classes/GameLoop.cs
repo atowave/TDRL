@@ -34,6 +34,8 @@ namespace MovingEngine
             Weapons.Aim();
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], " + Globals.player.rad + "°";
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
+            Globals.hpbar.Width = Globals.hpbarlength * ((double)Globals.player.HP / Globals.player.baseHP);
+            Globals.hptext.Content = Globals.player.HP + " / " + Globals.player.baseHP;
             Globals.step = Globals.default_step;
         }
 
