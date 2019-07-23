@@ -47,13 +47,12 @@ namespace MovingEngine
                 Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
                 Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
             };
-            Globals.canvas.Children.Add(Globals.Debug);
 
             Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
             Globals.gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
-            
+            Hide();
             LoadLevel();
-            MainMenu.Start();
+            MainMenu.Start(this);
 
             Collision.InitDebug();
         }
