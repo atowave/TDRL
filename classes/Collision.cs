@@ -40,6 +40,11 @@ namespace MovingEngine.classes
             {
                 Globals.player.UpdatePosition(Globals.player.lastLocation);
             }
+            if(Enemys(visualPointsR))
+            {
+                Globals.player.HP--;
+                Globals.DmgInd(1, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
+            }
         }
         public static bool Colliding(Location[] visualPoints)
         {
@@ -49,9 +54,14 @@ namespace MovingEngine.classes
         {
             return (visualPoints.Any(x => x.X < 0 || x.Y < 0 || x.X > Globals.currentLevel.Lvlsize_public[0] || x.Y > Globals.currentLevel.Lvlsize_public[1]));
         }
-        public static bool Enmeys(Location[] visualPoints)
+        public static bool Enemys(Location[] visualPoints)
         {
-            return visualPoints.Any(x => Globals.currentLevel.enemies.Any(y => Math.Sqrt((Math.Abs(x.X) - Math.Abs(y.location.X)) + (Math.Abs(x.Y) - Math.Abs(y.location.Y))) < y.hitboxRadius));
+            return visualPoints.Any(x => Globals.currentLevel.enemies.Any(y => Math.Sqrt(Math.Pow(Math.Abs(x.X) - Math.Abs(y.location.X), 2) + Math.Pow(Math.Abs(x.Y) - Math.Abs(y.location.Y), 2)) < y.hitboxRadius));
+        }
+        public static Enemy GetEnemy(Location[] visualPoints)
+        {
+            Location l = visualPoints.First(x => Globals.currentLevel.enemies.Any(y => Math.Sqrt(Math.Pow(Math.Abs(x.X) - Math.Abs(y.location.X), 2) + Math.Pow(Math.Abs(x.Y) - Math.Abs(y.location.Y), 2)) < y.hitboxRadius));
+            return Globals.currentLevel.enemies.First(y => Math.Sqrt(Math.Pow(Math.Abs(l.X) - Math.Abs(y.location.X), 2) + Math.Pow(Math.Abs(l.Y) - Math.Abs(y.location.Y), 2)) < y.hitboxRadius);
         }
         public static bool Objects(Location[] visualPoints)
         {

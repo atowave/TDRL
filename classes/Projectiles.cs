@@ -14,6 +14,7 @@ namespace MovingEngine.classes
         Rectangle canvas;
         double[] Movement = new double[] { 0.0, 0.0 };
         Point pos = new Point(0, 0);
+        public double dmg = 10;
         public Projectile(Rectangle cn, Point origin) {
             canvas = cn;
 
@@ -48,6 +49,14 @@ namespace MovingEngine.classes
             Location center = new Location(Canvas.GetLeft(canvas) + (canvas.Width / 2), Canvas.GetTop(canvas) + (canvas.Height / 2));
             if (Collision.Colliding(new[] { center }))
             {
+                Globals.projectiles.Remove(this);
+                Globals.currentLevel.Canvas.Children.Remove(canvas);
+            }
+            if (Collision.Enemys(new[] { center }))
+            {
+                Enemy e = Collision.GetEnemy(new[] { center });
+                e.HP -= dmg;
+                Globals.DmgInd((int)dmg, true, new Location(e.location.X - 25, e.location.Y - 75));
                 Globals.projectiles.Remove(this);
                 Globals.currentLevel.Canvas.Children.Remove(canvas);
             }
