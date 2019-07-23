@@ -91,6 +91,7 @@ namespace MovingEngine.classes
                 Globals.projectiles.Add(p6);
                 Globals.projectiles.Add(p7);
             }) { projectileBrush = Brushes.OrangeRed, projectileLength = 10, projectileWidth = 40 },
+            new WeaponItem(33, "Pass-Through Rifle", 13, 18, 45, a=>{ }) {Tags=new string[] { "Pass-Through"} },
         };
     }
     class WeaponItem : ItemBase
@@ -102,6 +103,7 @@ namespace MovingEngine.classes
         public Brush projectileBrush = Brushes.Blue;
         public int projectileLength = 40;
         public int projectileWidth = 10;
+        public string[] Tags;
         public WeaponItem(int probability, string name, int cooldown, double damage, int bulletspeed, Action<Projectile> onFire) : base(probability, name)
         {
             this.cooldown = cooldown;

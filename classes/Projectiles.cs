@@ -61,8 +61,9 @@ namespace MovingEngine.classes
                 if (e.wait == 0)
                 {
                     e.HP -= dmg;
+                    Globals.player.currentScore += dmg;
                     Globals.DmgInd((int)dmg, (int)e.HP, true, new Location(e.location.X - 25, e.location.Y - 75));
-                    Globals.projectiles.Remove(this);
+                    if (!Weapons.equipped.Tags.Contains("Pass-Through")) Globals.projectiles.Remove(this);
                     Globals.currentLevel.canvas.Children.Remove(canvas);
                 }
             }

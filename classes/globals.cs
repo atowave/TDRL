@@ -63,6 +63,7 @@ namespace MovingEngine
     }
     public class Player
     {
+        public double currentScore;
         public int baseHP = 180;
         public int HP;
         public Location lastLocation = new Location(0, 0);
