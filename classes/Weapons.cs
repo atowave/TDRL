@@ -13,7 +13,7 @@ namespace MovingEngine.classes
 {
     static class Weapons
     {
-        public static WeaponItem equipped = (WeaponItem)ItemBase.items.First(x => x.name == "Flamethrower");
+        public static WeaponItem equipped = (WeaponItem)ItemBase.items.First(x => x.name == "Default Gun");
         public static void Aim()
         {
             Globals.player.rad = Mathfuncs.XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
