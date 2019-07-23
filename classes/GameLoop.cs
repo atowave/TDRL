@@ -49,6 +49,7 @@ namespace MovingEngine
             } else if (i == 2) {
                 Globals.player.currentStage = 1;
                 Weapons.equipped = (WeaponItem)ItemBase.items.First(x => x.name == "Default Gun");
+                Weapons.equippedEffect = (EffectItem)ItemBase.items.First(x => x.name == "No Effect");
                 Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
             }
             Globals.currentLevel = null;
