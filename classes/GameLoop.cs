@@ -16,7 +16,7 @@ namespace MovingEngine
     public class GameLoop
     {
 
-        public GameLoop()
+        public void loop()
         {
             Moving();
             Mouse_Action();
@@ -73,6 +73,7 @@ namespace MovingEngine
                             break;
                         case Key.F3:
                             if (!Globals.canvas.Children.Contains(Globals.Debug))Globals.canvas.Children.Add(Globals.Debug);
+                            break;
                         case Key.P:
                             Debug.WriteLine("PAUSE");
                             break;

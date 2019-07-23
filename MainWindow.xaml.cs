@@ -47,9 +47,9 @@ namespace MovingEngine
                 Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
                 Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
             };
-
+            GameLoop loop = new GameLoop();
             Globals.gamelooptimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds((1000 / 60))};
-            Globals.gamelooptimer.Tick += (object sender, EventArgs e) => new GameLoop();
+            Globals.gamelooptimer.Tick += (object sender, EventArgs e) => loop.loop();
             Hide();
             LoadLevel();
             MainMenu.Start(this);
