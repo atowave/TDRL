@@ -9,21 +9,43 @@ namespace MovingEngine.classes
 {
     class ItemBase
     {
+        public int probability = 1;
         public string name;
-        public ItemBase(string name)
+        public ItemBase(int probability, string name)
         {
             this.name = name;
+            this.probability = probability;
         }
         public virtual void OnItemEquip()
         {
 
         }
+        public static ItemBase GetRandomItem()
+        {
+            int currentprob = 0;
+            Dictionary<int, ItemBase> sets = new Dictionary<int, ItemBase>();
+            foreach(var i in items)
+            {
+                sets.Add(currentprob, i);
+                currentprob += i.probability;
+            }
+            int choice = Globals.random.Next(0, currentprob);
+            ItemBase choiceItem = null;
+            foreach(var i in sets)
+            {
+                if(choice >= i.Key)
+                {
+                    choiceItem = i.Value;
+                }
+            }
+            return choiceItem;
+        }
         public static List<ItemBase> items = new List<ItemBase>()
         {
-            new WeaponItem("Default Gun", 8, 12, 20, a => { }),
-            new WeaponItem("Sniper", 45, 100, 60, a => { }),
-            new WeaponItem("Lasergun", 0, 2, 50, a => { }) { projectileLength = 80 },
-            new WeaponItem("Shotgun", 25, 8, 12, a => {
+            new WeaponItem(100, "Default Gun", 8, 12, 20, a => { }),
+            new WeaponItem(33, "Sniper", 45, 100, 60, a => { }),
+            new WeaponItem(33, "Lasergun", 0, 2, 50, a => { }) { projectileLength = 80 },
+            new WeaponItem(50, "Shotgun", 25, 8, 12, a => {
                 Projectile p2 = a.copy();
                 Projectile p3 = a.copy();
                 Tuple<double, double> mov = new Tuple<double, double>(a.Movement[0], a.Movement[1]);
@@ -36,7 +58,7 @@ namespace MovingEngine.classes
                 Globals.projectiles.Add(p2);
                 Globals.projectiles.Add(p3);
             }),
-            new WeaponItem("Flamethrower", 5, 0.95, 6, a => {
+            new WeaponItem(33, "Flamethrower", 5, 3, 6, a => {
                 Projectile p2 = a.copy();
                 Projectile p3 = a.copy();
                 Projectile p4 = a.copy();
@@ -80,7 +102,7 @@ namespace MovingEngine.classes
         public Brush projectileBrush = Brushes.Blue;
         public int projectileLength = 40;
         public int projectileWidth = 10;
-        public WeaponItem(string name, int cooldown, double damage, int bulletspeed, Action<Projectile> onFire) : base(name)
+        public WeaponItem(int probability, string name, int cooldown, double damage, int bulletspeed, Action<Projectile> onFire) : base(probability, name)
         {
             this.cooldown = cooldown;
             this.damage = damage;
