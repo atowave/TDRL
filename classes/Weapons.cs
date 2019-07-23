@@ -25,11 +25,11 @@ namespace MovingEngine.classes
         {
             Rectangle shoot_projectile = new Rectangle {
                 Fill = equipped.projectileBrush,
-                Width = 10,
-                Height = 40
+                Width = equipped.projectileWidth,
+                Height = equipped.projectileLength
             };
 
-            shoot_projectile.RenderTransform = new RotateTransform(Globals.player.rad, 5, 20);
+            shoot_projectile.RenderTransform = new RotateTransform(Globals.player.rad, shoot_projectile.Width / 2, shoot_projectile.Height / 2);
             double vec_x = Globals.mouse_position.X - Globals.Middlepoint.X;
             double vec_y = Globals.mouse_position.Y - Globals.Middlepoint.Y;
             double per_x = (Math.Abs(vec_x) / (Math.Abs(vec_x) + Math.Abs(vec_y)));

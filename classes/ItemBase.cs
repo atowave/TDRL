@@ -22,7 +22,7 @@ namespace MovingEngine.classes
         {
             new WeaponItem("Default Gun", 8, 12, 20, a => { }),
             new WeaponItem("Sniper", 45, 100, 60, a => { }),
-            new WeaponItem("Lasergun", 2, 2, 8, a => { }),
+            new WeaponItem("Lasergun", 0, 2, 50, a => { }) { projectileLength = 80 },
             new WeaponItem("Shotgun", 25, 8, 12, a => {
                 Projectile p2 = a.copy();
                 Projectile p3 = a.copy();
@@ -68,7 +68,7 @@ namespace MovingEngine.classes
                 Globals.projectiles.Add(p5);
                 Globals.projectiles.Add(p6);
                 Globals.projectiles.Add(p7);
-            }) { projectileBrush = Brushes.OrangeRed },
+            }) { projectileBrush = Brushes.OrangeRed, projectileLength = 10, projectileWidth = 40 },
         };
     }
     class WeaponItem : ItemBase
@@ -78,6 +78,8 @@ namespace MovingEngine.classes
         public int bulletspeed;
         Action<Projectile> onFire;
         public Brush projectileBrush = Brushes.Blue;
+        public int projectileLength = 40;
+        public int projectileWidth = 10;
         public WeaponItem(string name, int cooldown, double damage, int bulletspeed, Action<Projectile> onFire) : base(name)
         {
             this.cooldown = cooldown;
