@@ -56,7 +56,7 @@ namespace MovingEngine.classes
             {
                 Enemy e = Collision.GetEnemy(new[] { center });
                 e.HP -= dmg;
-                Globals.DmgInd((int)dmg, true, new Location(e.location.X - 25, e.location.Y - 75));
+                Globals.DmgInd((int)dmg, (int)e.HP, true, new Location(e.location.X - 25, e.location.Y - 75));
                 Globals.projectiles.Remove(this);
                 Globals.currentLevel.Canvas.Children.Remove(canvas);
             }

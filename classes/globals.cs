@@ -16,9 +16,9 @@ namespace MovingEngine
 {
     public static class Globals
     {
-        public static void DmgInd(int dmg, bool enemy, Location location)
+        public static void DmgInd(int dmg, int currenthp, bool enemy, Location location)
         {
-            Label dmglabel = new Label { Content = -dmg, Foreground = (enemy ? Brushes.Green : Brushes.Red), FontSize = 36 * Globals.fontSizeMultiplier };
+            Label dmglabel = new Label { Content = -dmg + (enemy ? ", (" + currenthp + ")" : ""), Foreground = (enemy ? Brushes.Green : Brushes.Red), FontSize = 36 * Globals.fontSizeMultiplier };
             Canvas.SetLeft(dmglabel, location.X + random.Next(-32, 33));
             Canvas.SetTop(dmglabel, location.Y);
 

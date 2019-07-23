@@ -43,7 +43,7 @@ namespace MovingEngine.classes
             if(Enemys(visualPointsR))
             {
                 Globals.player.HP--;
-                Globals.DmgInd(1, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
+                Globals.DmgInd(1, Globals.player.HP, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
             }
         }
         public static bool Colliding(Location[] visualPoints)
