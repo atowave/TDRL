@@ -54,9 +54,9 @@ namespace MovingEngine
             Canvas.SetRight(Loading, 0);
             Canvas.SetZIndex(Globals.loading, 1000);
 
-            Rectangle hpouter = new Rectangle { Fill = Brushes.Black, Height = 90, Width = SystemParameters.VirtualScreenWidth - 20 };
-            Rectangle hpborder = new Rectangle { Fill = Brushes.White, Height = 70, Width = SystemParameters.VirtualScreenWidth - 40 };
-            Rectangle hpinner = new Rectangle { Fill = Brushes.Red, Height = 50, Width = SystemParameters.VirtualScreenWidth - 60 };
+            Rectangle hpouter = new Rectangle { Fill = Brushes.Black, Height = 90, Width = Globals.canvas.ActualWidth - 20 };
+            Rectangle hpborder = new Rectangle { Fill = Brushes.White, Height = 70, Width = Globals.canvas.ActualWidth - 40 };
+            Rectangle hpinner = new Rectangle { Fill = Brushes.Red, Height = 50, Width = Globals.canvas.ActualWidth - 60 };
 
             Globals.hpbar = hpinner;
             Globals.hpbarlength = (int)hpinner.Width;
@@ -74,7 +74,7 @@ namespace MovingEngine
             Globals.canvas.Children.Add(hpborder);
             Globals.canvas.Children.Add(hpinner);
 
-            Label hptext = new Label { Height = 50, Width = SystemParameters.VirtualScreenWidth - 60, Foreground = Brushes.Black, Content = "0 / 0", HorizontalContentAlignment = HorizontalAlignment.Center, FontSize = 32 * Globals.fontSizeMultiplier };
+            Label hptext = new Label { Height = 50, Width = Globals.canvas.ActualWidth - 60, Foreground = Brushes.Black, Content = "0 / 0", HorizontalContentAlignment = HorizontalAlignment.Center, FontSize = 32 * Globals.fontSizeMultiplier };
             Canvas.SetLeft(hptext, 30);
             Canvas.SetTop(hptext, 30);
 
