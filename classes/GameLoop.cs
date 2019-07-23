@@ -21,6 +21,7 @@ namespace MovingEngine
             Moving();
             Mouse_Action();
             foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
+            foreach (Enemy enemy in Globals.currentLevel.enemies.ToArray()) enemy.AI();
             Collision.CheckCollision();
             Weapons.Aim();
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.Canvas) + " | " + Canvas.GetTop(Globals.currentLevel.Canvas) + "], " + Globals.player.rad + "°";

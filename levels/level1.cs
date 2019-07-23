@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using UnnamedGame.ObjectClasses;
 
 namespace MovingEngine.levels
 {
@@ -19,9 +21,7 @@ namespace MovingEngine.levels
 
         public override void Build_Level()
         {
-            LevelGrid grid = new LevelGrid();
-            grid.SetContentPos(new LevelContent(Brushes.Black), 2, 2);
-            new LevelObj(new Location(150, 150), new Size(40, 40), Brushes.Red);
+            new Enemy(new Location(400, 150), new Canvas { Background = Brushes.Black, Width=50, Height=50 });
         }
     }
 }
