@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace MovingEngine.classes
@@ -12,7 +13,7 @@ namespace MovingEngine.classes
     public class Projectile
     {
         Rectangle canvas;
-        double[] Movement = new double[] { 0.0, 0.0 };
+        internal double[] Movement = new double[] { 0.0, 0.0 };
         bool enemy;
         Point pos = new Point(0, 0);
         double dmg;
@@ -31,10 +32,18 @@ namespace MovingEngine.classes
         }
         public Projectile copy()
         {
-            return (Projectile)this.MemberwiseClone();
+            Projectile np = (Projectile)this.MemberwiseClone();
+            np.canvas = new Rectangle { Height = canvas.Height, Width = canvas.Width, Fill = canvas.Fill };
+            Canvas.SetLeft(np.canvas, Canvas.GetLeft(canvas));
+            Canvas.SetTop(np.canvas, Canvas.GetTop(canvas));
+            Globals.currentLevel.Canvas.Children.Add(np.canvas);
+            np.canvas.RenderTransform = new RotateTransform(((RotateTransform)canvas.RenderTransform).Angle, ((RotateTransform)canvas.RenderTransform).CenterX, ((RotateTransform)canvas.RenderTransform).CenterY);
+            return np;
         }
         public void Move()
         {
+            Canvas.SetZIndex(canvas, -1);
+
             pos.X = pos.X + Movement[0];
             pos.Y = pos.Y + Movement[1];
             Canvas.SetLeft(canvas, pos.X);

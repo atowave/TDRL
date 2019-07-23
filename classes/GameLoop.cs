@@ -51,7 +51,7 @@ namespace MovingEngine
                         if (Globals.player.ShootDelayCurrent == 0)
                         {
                             Weapons.Shoot();
-                            Globals.player.ShootDelayCurrent = Globals.player.ShootDelay;
+                            Globals.player.ShootDelayCurrent = Weapons.equipped.cooldown;
                         }
                         break;
 
