@@ -97,9 +97,12 @@ namespace MovingEngine.classes
                         Canvas.SetZIndex(x, 7);
                         Globals.canvas.Children.Add(x);
                         DoubleAnimation op = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(0.25) };
+                        double lvlid = Globals.player.currentStage;
                         op.Completed += (a, b) =>
                         {
                             Globals.canvas.Children.Remove(x);
+                            if (Globals.player.currentStage != lvlid)
+                                return;
                             Globals.currentLevel.enemies.ForEach(e =>
                             {
                                 e.HP -= 25;
