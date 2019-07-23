@@ -33,7 +33,7 @@ namespace MovingEngine
             if (Globals.fontSizeMultiplier > 1)
                 Globals.fontSizeMultiplier = 1;
             FontFamily = (FontFamily)Resources["FixedSys"];
-
+            Globals.window = this;
             Show();
             Globals.loading = new Canvas
             {
@@ -102,6 +102,7 @@ namespace MovingEngine
 
             Globals.player.currentStage = 1;
             GameLoop.rungame(0);
+            MainMenu.Start();
 
             Collision.InitDebug();
         }

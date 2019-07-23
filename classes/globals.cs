@@ -37,6 +37,7 @@ namespace MovingEngine
         }
 
         public static Canvas canvas;
+        public static MainWindow window;
         public static GameLoop loop = new GameLoop();
         public static Player player = new Player();
         public static Level currentLevel;

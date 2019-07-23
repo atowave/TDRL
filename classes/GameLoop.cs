@@ -39,6 +39,7 @@ namespace MovingEngine
             Globals.step = Globals.default_step;
         }
 
+
         public static void rungame(int i)
         {
             if (i == 1)
@@ -53,7 +54,7 @@ namespace MovingEngine
             Globals.gamelooptimer.Stop();
             Globals.player.HP = Globals.player.baseHP;
             new Level();
-            MainMenu.Start();
+            if (i != 0) MainMenu.BetweenLevels(i);
         }
 
         private void Mouse_Action()
