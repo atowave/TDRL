@@ -20,7 +20,7 @@ namespace MovingEngine
         {
             Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
             Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
-            if (Globals.currentLevel.enemies.Count == 0 && false)
+            if (Globals.currentLevel.enemies.Count == 0)
             {
                 Endgame(false);
             }
@@ -51,7 +51,7 @@ namespace MovingEngine
                         if (Globals.player.ShootDelayCurrent == 0)
                         {
                             Weapons.Shoot();
-                            Globals.player.ShootDelayCurrent = Globals.player.ShootDelay;
+                            Globals.player.ShootDelayCurrent = Weapons.equipped.cooldown;
                         }
                         break;
 

@@ -13,6 +13,7 @@ namespace MovingEngine.classes
 {
     static class Weapons
     {
+        public static WeaponItem equipped = (WeaponItem)ItemBase.items.First(x => x.name == "Default Gun");
         public static void Aim()
         {
             Globals.player.rad = Mathfuncs.XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
@@ -23,7 +24,7 @@ namespace MovingEngine.classes
         public static void Shoot()
         {
             Rectangle shoot_projectile = new Rectangle {
-                Fill = Brushes.Blue,
+                Fill = equipped.projectileBrush,
                 Width = 10,
                 Height = 40
             };
@@ -33,9 +34,9 @@ namespace MovingEngine.classes
             double vec_y = Globals.mouse_position.Y - Globals.Middlepoint.Y;
             double per_x = (Math.Abs(vec_x) / (Math.Abs(vec_x) + Math.Abs(vec_y)));
             double per_y = (Math.Abs(vec_y) / (Math.Abs(vec_x) + Math.Abs(vec_y)));
-            double new_x = Math.Sqrt(Math.Pow(20 * per_x, 2)) * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
-            double new_y = Math.Sqrt(Math.Pow(20 * per_y, 2)) * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
-            new Projectile(shoot_projectile, new Point((Collision.visualPointsR[0].X + Collision.visualPointsR[3].X) / 2 - 5, (Collision.visualPointsR[0].Y + Collision.visualPointsR[3].Y) / 2 - 20), new double[] { new_x, new_y });
+            double new_x = Math.Sqrt(Math.Pow(equipped.bulletspeed * per_x, 2)) * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
+            double new_y = Math.Sqrt(Math.Pow(equipped.bulletspeed * per_y, 2)) * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
+            equipped.OnFire(new Projectile(shoot_projectile, new Point((Collision.visualPointsR[0].X + Collision.visualPointsR[3].X) / 2 - 5, (Collision.visualPointsR[0].Y + Collision.visualPointsR[3].Y) / 2 - 20), new double[] { new_x, new_y }, false, equipped.damage));
         }
     }
 }
