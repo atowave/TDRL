@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using UnnamedGame.ObjectClasses;
+using System.Windows.Shapes;
 
 namespace MovingEngine.levels
 {
@@ -21,7 +22,7 @@ namespace MovingEngine.levels
 
         public override void Build_Level()
         {
-            new Enemy(new Location(400, 150), new Canvas { Background = Brushes.Black, Width=50, Height=50 });
+            new Enemy(new Location(300, 300), new Rectangle { Height = 75, Width = 75, Fill = Brushes.Blue });
         }
     }
 }

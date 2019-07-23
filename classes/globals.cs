@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using MovingEngine.classes;
 using MovingEngine.levels;
@@ -15,12 +16,32 @@ namespace MovingEngine
 {
     public static class Globals
     {
+        public static void DmgInd(int dmg, bool enemy, Location location)
+        {
+            Label dmglabel = new Label { Content = -dmg, Foreground = (enemy ? Brushes.Green : Brushes.Red), FontSize = 36 * Globals.fontSizeMultiplier };
+            Canvas.SetLeft(dmglabel, location.X + random.Next(-32, 33));
+            Canvas.SetTop(dmglabel, location.Y);
+
+            Globals.currentLevel.Canvas.Children.Add(dmglabel);
+
+            DoubleAnimation opacity = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(1)), FillBehavior.HoldEnd);
+            DoubleAnimation ypos = new DoubleAnimation(location.Y, location.Y - 100, new Duration(TimeSpan.FromSeconds(1)), FillBehavior.HoldEnd);
+            dmglabel.BeginAnimation(Canvas.TopProperty, ypos);
+            dmglabel.BeginAnimation(FrameworkElement.OpacityProperty, opacity);
+
+            ypos.Completed += (a, b) =>
+            {
+                Globals.currentLevel.Canvas.Children.Remove(dmglabel);
+            };
+        }
+
         public static Canvas canvas;
         public static Player player = new Player();
         public static Baselevel currentLevel;
         public const double default_step = 7.5;
         public static double step;
         public static Point mouse_position;
+        public static Random random = new Random();
         public static double fontSizeMultiplier;
         public static DispatcherTimer gamelooptimer;
         public static MouseHandler MouseHandler = new MouseHandler();
@@ -35,6 +56,8 @@ namespace MovingEngine
     }
     public class Player
     {
+        public const int baseHP = 180;
+        public int HP = baseHP;
         public Location lastLocation = new Location(0, 0);
         public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Red };
         public double ShootDelay = 10;

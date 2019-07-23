@@ -12,17 +12,32 @@ namespace MovingEngine.classes
 {
     public class Enemy
     {
-        public Location location;
+        public Location location
+        {
+            get
+            {
+                return new Location(Canvas.GetLeft(sprite) + (sprite.Width / 2), Canvas.GetTop(sprite) + (sprite.Height / 2));
+            }
+            set
+            {
+                Canvas.SetLeft(sprite, value.X - (sprite.Width / 2));
+                Canvas.SetTop(sprite, value.Y - (sprite.Height / 2));
+            }
+        }
         public FrameworkElement sprite;
         public double hitboxRadius = 40;
         public double rotation = 0;
         public double AI_Threshold = 100;
+        public double HP = 100;
 
-        public Enemy(Location origin, FrameworkElement sprite, double hitboxRadius = 40)
+        public Enemy(Location origin, FrameworkElement sprite, double hitboxRadius = 40, double HP = 100)
         {
-            location = origin;
             this.sprite = sprite;
             this.hitboxRadius = hitboxRadius;
+            this.HP = HP;
+
+            Canvas.SetLeft(sprite, origin.X);
+            Canvas.SetTop(sprite, origin.Y);
 
             Canvas.SetTop(sprite, origin.X);
             Canvas.SetLeft(sprite, origin.Y);
