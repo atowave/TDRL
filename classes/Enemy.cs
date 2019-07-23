@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace MovingEngine.classes
@@ -88,6 +89,25 @@ namespace MovingEngine.classes
 
                 if (HP <= 0)
                 {
+                    if(Weapons.equippedEffect.effect == "EXPLOSION")
+                    {
+                        Rectangle x = new Rectangle { Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth, Fill = Brushes.DarkOrange };
+                        Canvas.SetTop(x, 0);
+                        Canvas.SetLeft(x, 0);
+                        Canvas.SetZIndex(x, 7);
+                        Globals.canvas.Children.Add(x);
+                        DoubleAnimation op = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromSeconds(0.25) };
+                        op.Completed += (a, b) =>
+                        {
+                            Globals.canvas.Children.Remove(x);
+                            Globals.currentLevel.enemies.ForEach(e =>
+                            {
+                                e.HP -= 25;
+                                Globals.DmgInd(25, (int)e.HP, true, new Location(e.location.X - 25, e.location.Y - 75));
+                            });
+                        };
+                        x.BeginAnimation(Rectangle.OpacityProperty, op);
+                    }
                     Globals.currentLevel.canvas.Children.Remove(sprite);
                     Globals.currentLevel.enemies.Remove(this);
                 }

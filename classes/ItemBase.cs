@@ -91,6 +91,7 @@ namespace MovingEngine.classes
                 Globals.projectiles.Add(p6);
                 Globals.projectiles.Add(p7);
             }) { projectileBrush = Brushes.OrangeRed, projectileLength = 10, projectileWidth = 40 },
+            new EffectItem(0, "No Effect", "NONE")
         };
     }
     class WeaponItem : ItemBase
@@ -116,6 +117,14 @@ namespace MovingEngine.classes
         public override void OnItemEquip()
         {
             Weapons.equipped = this;
+        }
+    }
+    class EffectItem : ItemBase
+    {
+        public string effect;
+        public EffectItem(int probability, string name, string effect) : base(probability, name)
+        {
+            this.effect = effect;
         }
     }
 }
