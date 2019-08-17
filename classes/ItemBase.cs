@@ -104,7 +104,7 @@ namespace MovingEngine.classes
         public Brush projectileBrush = Brushes.Blue;
         public int projectileLength = 40;
         public int projectileWidth = 10;
-        public string[] Tags = new string[0];
+        public string[] Tags;
         public WeaponItem(int probability, string name, int cooldown, double damage, int bulletspeed, Action<Projectile> onFire) : base(probability, name)
         {
             this.cooldown = cooldown;
