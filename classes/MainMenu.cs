@@ -20,13 +20,21 @@ namespace MovingEngine.classes
         public static void Start()
         {
             Menu = new Canvas { Background = new SolidColorBrush { Color = Color.FromArgb(127, 0, 0, 0) }, Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth };
-            Canvas.SetZIndex(Menu, 3);
+            Canvas.SetZIndex(Menu, 10);
             Menu.KeyDown += Menu_KeyDown;
 
             Button Start = new Button
             {
                 Content = "START STAGE "+Globals.player.currentStage,
                 FontSize = 100 * Globals.fontSizeMultiplier,
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent,
+                Foreground = Brushes.Yellow
+            };
+            Button Options = new Button
+            {
+                Content = "OPTIONS",
+                FontSize = 50 * Globals.fontSizeMultiplier,
                 Background = Brushes.Transparent,
                 BorderBrush = Brushes.Transparent,
                 Foreground = Brushes.Yellow
@@ -41,6 +49,7 @@ namespace MovingEngine.classes
 
             Menu.Children.Add(Start);
             Menu.Children.Add(copyright);
+            Menu.Children.Add(Options);
             Canvas.SetBottom(copyright, 0);
             Canvas.SetRight(copyright, 0);
 
@@ -52,7 +61,8 @@ namespace MovingEngine.classes
                 dt.Stop();
                 Canvas.SetTop(Start, (Menu.Height - Start.ActualHeight) / 2);
                 Canvas.SetLeft(Start, (Menu.Width - Start.ActualWidth) / 2);
-
+                Canvas.SetTop(Options, (Menu.Height - Start.ActualHeight) / 2 + Start.ActualHeight + 10);
+                Canvas.SetLeft(Options, (Menu.Width - Options.ActualWidth) / 2);
                 Globals.canvas.Children.Remove(Globals.loading);
             };
             dt.Start();
@@ -78,12 +88,12 @@ namespace MovingEngine.classes
         internal static void LootMenu()
         {
             Menu = new Canvas { Background = new SolidColorBrush { Color = Color.FromArgb(127, 0, 0, 0) }, Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth };
-            Canvas.SetZIndex(Menu, 3);
+            Canvas.SetZIndex(Menu, 10);
             Globals.canvas.Children.Add(Menu);
             item = ItemBase.GetRandomItem();
             Label Text = new Label
             {
-                Content = "You just found a " + item.name.ToUpper() + "!\n\nDo you want to equip it? It might override a currently equipped item.",
+                Content = "You just found a " + item.name.ToUpper() + "!\n\nDo you want to equip it? It will override a currently equipped item.",
                 Foreground = Brushes.Yellow,
                 FontSize = 50 * Globals.fontSizeMultiplier,
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -150,7 +160,7 @@ namespace MovingEngine.classes
                 };
                 x.BeginAnimation(Rectangle.OpacityProperty, op2);
                 Menu = new Canvas { Background = new SolidColorBrush { Color = Color.FromArgb(127, 0, 0, 0) }, Height = Globals.canvas.ActualHeight, Width = Globals.canvas.ActualWidth };
-                Canvas.SetZIndex(Menu, 3);
+                Canvas.SetZIndex(Menu, 10);
                 Menu.KeyDown += Menu_KeyDown;
                 Globals.canvas.Children.Add(Menu);
                 Label Stage = new Label()
@@ -167,7 +177,17 @@ namespace MovingEngine.classes
                     BorderBrush = Brushes.Transparent,
                     Foreground = Brushes.Yellow
                 };
+                Button Options = new Button
+                {
+                    Content = "OPTIONS",
+                    FontSize = 50 * Globals.fontSizeMultiplier,
+                    Background = Brushes.Transparent,
+                    BorderBrush = Brushes.Transparent,
+                    Foreground = Brushes.Yellow
+                };
                 Start.Click += BeginRound;
+
+                Menu.Children.Add(Options);
                 Menu.Children.Add(Stage);
                 Menu.Children.Add(Start);
                 DispatcherTimer dt = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.001) };
@@ -179,6 +199,8 @@ namespace MovingEngine.classes
 
                     Canvas.SetTop(Start, (Menu.Height - Start.ActualHeight) / 2);
                     Canvas.SetLeft(Start, -Start.ActualWidth);
+                    Canvas.SetTop(Options, (Menu.Height - Start.ActualHeight) / 2 + Start.ActualHeight + 10);
+                    Canvas.SetLeft(Options, -Start.ActualWidth);
 
                     DispatcherTimer dt2 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
                     dt2.Tick += (f, g) =>
@@ -186,8 +208,10 @@ namespace MovingEngine.classes
                         dt2.Stop();
                         DoubleAnimation da1 = new DoubleAnimation { From = (Menu.Width - Stage.ActualWidth) / 2, To = Menu.Width, Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
                         DoubleAnimation da2 = new DoubleAnimation { From = -Start.ActualWidth, To = (Menu.Width - Start.ActualWidth) / 2, Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
+                        DoubleAnimation da3 = new DoubleAnimation { From = -Start.ActualWidth, To = (Menu.Width - Options.ActualWidth) / 2, Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
                         Stage.BeginAnimation(Canvas.LeftProperty, da1);
                         Start.BeginAnimation(Canvas.LeftProperty, da2);
+                        Options.BeginAnimation(Canvas.LeftProperty, da3);
                     };
                     dt2.Start();
 

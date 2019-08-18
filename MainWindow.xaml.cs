@@ -54,6 +54,8 @@ namespace MovingEngine
             Canvas.SetRight(Loading, 0);
             Canvas.SetZIndex(Globals.loading, 1000);
 
+            Globals.player.HP = Globals.player.baseHP;
+
             Rectangle hpouter = new Rectangle { Fill = Brushes.Black, Height = 90, Width = Globals.canvas.ActualWidth - 20 };
             Rectangle hpborder = new Rectangle { Fill = Brushes.White, Height = 70, Width = Globals.canvas.ActualWidth - 40 };
             Rectangle hpinner = new Rectangle { Fill = Brushes.Red, Height = 50, Width = Globals.canvas.ActualWidth - 60 };
@@ -84,8 +86,8 @@ namespace MovingEngine
             Globals.canvas.Children.Add(hptext);
 
             MouseMove += MouseSaver;
-            MouseDown += GameLoop.Mouse;
-            MouseUp += (object sender, MouseButtonEventArgs e) => Globals.MouseHandler.Pressed = MouseButtonState.Released;
+            MouseDown += (a,b) => Globals.MouseHandler.Add(b.ChangedButton);
+            MouseUp += (object sender, MouseButtonEventArgs e) => Globals.MouseHandler.Remove(e.ChangedButton);
             Globals.canvas.Children.Add(Globals.player.visual);
             Canvas.SetZIndex(Globals.player.visual, 2);
 

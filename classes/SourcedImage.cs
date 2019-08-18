@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace UnnamedGame.ObjectClasses
@@ -11,14 +12,17 @@ namespace UnnamedGame.ObjectClasses
         public Image baseImage = new Image();
         public Image baseimg;
         public Image image;
+        public ImageSource Source;
 
         public static Dictionary<string, BitmapImage> loadedSources = new Dictionary<string, BitmapImage>();
 
         public SourcedImage(string source)
         {
+
+            Source = SourceToImage(source);
             image = new Image
             {
-                Source = SourceToImage(source)
+                Source = Source
             };
         }
 

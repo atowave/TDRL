@@ -47,12 +47,13 @@ namespace MovingEngine
         public static Random random = new Random();
         public static double fontSizeMultiplier;
         public static DispatcherTimer gamelooptimer;
-        public static MouseHandler MouseHandler = new MouseHandler();
+        public static List<MouseButton> MouseHandler = new List<MouseButton>();
         public static List<Projectile> projectiles = new List<Projectile>();
         public static Canvas loading;
         public static Rectangle hpbar;
         public static Label hptext;
         public static int hpbarlength;
+        public static bool debugging = false;
         public static Point Middlepoint { get {
                 return new Point(
                     Globals.canvas.ActualWidth/2,
@@ -124,10 +125,5 @@ namespace MovingEngine
         {
             return new Location(X, Y);
         }
-    }
-    public class MouseHandler
-    {
-        public MouseButtonState Pressed = MouseButtonState.Released;
-        public MouseButton Button;
     }
 }

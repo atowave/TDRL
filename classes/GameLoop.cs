@@ -21,17 +21,17 @@ namespace MovingEngine
         {
             Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
             Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
-            if (Globals.currentLevel.enemies.Count == 0)
+            if (Globals.currentLevel.enemies.Count == 0 && !Globals.debugging)
             {
                 rungame(1);
             }
 
+            Weapons.Aim();
             Moving();
             Mouse_Action();
             foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
             foreach (Enemy enemy in Globals.currentLevel.enemies.ToArray()) enemy.AI();
             Collision.CheckCollision();
-            Weapons.Aim();
             Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], " + Globals.player.rad + "°";
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
             Globals.hpbar.Width = Globals.hpbarlength * ((double)Globals.player.HP / Globals.player.baseHP);
@@ -68,9 +68,9 @@ namespace MovingEngine
 
         private void Mouse_Action()
         {
-            if (Globals.MouseHandler.Pressed == MouseButtonState.Pressed)
+            foreach(MouseButton mb in Globals.MouseHandler)
             {
-                switch(Globals.MouseHandler.Button)
+                switch(mb)
                 {
                     case MouseButton.Left:
                         if (Globals.player.ShootDelayCurrent == 0)
@@ -79,7 +79,9 @@ namespace MovingEngine
                             Globals.player.ShootDelayCurrent = Weapons.equipped.cooldown;
                         }
                         break;
-
+                    case MouseButton.Right:
+                        Weapons.Zooming();
+                        break;
                 }
             }
             
@@ -111,6 +113,10 @@ namespace MovingEngine
                             break;
                         case Key.F3:
                             if (!Globals.canvas.Children.Contains(Globals.Debug))Globals.canvas.Children.Add(Globals.Debug);
+                            Globals.debugging = true;
+                            Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
+                            Globals.currentLevel = null;
+                            new Level(true);
                             break;
                         case Key.P:
                             Debug.WriteLine("PAUSE");
@@ -119,12 +125,6 @@ namespace MovingEngine
                 }
             }
             Globals.player.UpdatePosition();
-        }
-
-        public static void Mouse(object sender, MouseButtonEventArgs e)
-        {
-            Globals.MouseHandler.Pressed = e.ButtonState;
-            Globals.MouseHandler.Button = e.ChangedButton;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace MovingEngine.classes
 
         public static void Aim()
         {
+            Weapons.equipped.currentAccuracy = ((WeaponItem)ItemBase.items.First(a => a.name == Weapons.equipped.name)).accuracy;
             Globals.player.rad = Mathfuncs.XYToDegrees((Globals.mouse_position.X - Globals.Middlepoint.X), (Globals.mouse_position.Y - Globals.Middlepoint.Y));
             RotateTransform rotateTransform = new RotateTransform(Globals.player.rad, Globals.player.visual.Height / 2, Globals.player.visual.Height / 2);
             Globals.player.visual.RenderTransform = rotateTransform;
@@ -38,7 +39,13 @@ namespace MovingEngine.classes
             double per_y = (Math.Abs(vec_y) / (Math.Abs(vec_x) + Math.Abs(vec_y)));
             double new_x = Math.Sqrt(Math.Pow(equipped.bulletspeed * per_x, 2)) * (vec_x != 0 ? (vec_x / Math.Abs(vec_x)) : 1);
             double new_y = Math.Sqrt(Math.Pow(equipped.bulletspeed * per_y, 2)) * (vec_y != 0 ? (vec_y / Math.Abs(vec_y)) : 1);
-            equipped.OnFire(new Projectile(shoot_projectile, new Point((Collision.visualPointsR[0].X + Collision.visualPointsR[3].X) / 2 - 5, (Collision.visualPointsR[0].Y + Collision.visualPointsR[3].Y) / 2 - 20), new double[] { new_x, new_y }, false, equipped.damage));
+            Tuple<double, double> movment = Mathfuncs.RotateAroundOrigin(new Tuple<double, double>(new_x, new_y), new Tuple<double, double>(0, 0), Globals.random.Next(-(int)Weapons.equipped.currentAccuracy/2, (int)Weapons.equipped.currentAccuracy/2));
+            equipped.OnFire(new Projectile(shoot_projectile, new Point((Collision.visualPointsR[0].X + Collision.visualPointsR[3].X) / 2 - 5, (Collision.visualPointsR[0].Y + Collision.visualPointsR[3].Y) / 2 - 20), new double[] { movment.Item1, movment.Item2 }, false, equipped.damage));
+        }
+        public static void Zooming()
+        {
+            Weapons.equipped.currentAccuracy = ((WeaponItem)ItemBase.items.First(a => a.name == Weapons.equipped.name)).accuracy / 2;
+            Weapons.equipped.onAim();
         }
     }
 }
