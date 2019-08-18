@@ -32,8 +32,10 @@ namespace MovingEngine
             foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
             foreach (Enemy enemy in Globals.currentLevel.enemies.ToArray()) enemy.AI();
             Collision.CheckCollision();
-            Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], " + Globals.player.rad + "°";
+            Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], MovVec: ["+Globals.player.Movement[0]+" | "+ Globals.player.Movement[1]+"] " + Globals.player.rad + "°"+ " Pjc:"+Globals.projectiles.Count;
             Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
+            Globals.Debug.Content += "\nWeapon: Acc " + Weapons.equipped.currentAccuracy;
+            Canvas.SetZIndex(Globals.Debug, 600);
             Globals.hpbar.Width = Globals.hpbarlength * ((double)Globals.player.HP / Globals.player.baseHP);
             Globals.hptext.Content = Globals.player.HP + " / " + Globals.player.baseHP;
             Globals.step = Globals.default_step;
@@ -90,6 +92,48 @@ namespace MovingEngine
 
         private void Moving()
         {
+            if (Globals.player.Movement[0] > 0)
+            {
+                if (Globals.player.Movement[0] < Globals.currentLevel.Slithering)
+                {
+                    Globals.player.Movement[0] = 0;
+                } else
+                {
+                    Globals.player.Movement[0] -= Globals.currentLevel.Slithering;
+                }
+            } else if(Globals.player.Movement[0] < 0)
+            {
+                if (Globals.player.Movement[0] > Globals.currentLevel.Slithering)
+                {
+                    Globals.player.Movement[0] = 0;
+                }
+                else
+                {
+                    Globals.player.Movement[0] += Globals.currentLevel.Slithering;
+                }
+            }
+            if (Globals.player.Movement[1] > 0)
+            {
+                if (Globals.player.Movement[1] < Globals.currentLevel.Slithering)
+                {
+                    Globals.player.Movement[1] = 0;
+                }
+                else
+                {
+                    Globals.player.Movement[1] -= Globals.currentLevel.Slithering;
+                }
+            }
+            else if (Globals.player.Movement[1] < 0)
+            {
+                if (Globals.player.Movement[1] > Globals.currentLevel.Slithering)
+                {
+                    Globals.player.Movement[1] = 0;
+                }
+                else
+                {
+                    Globals.player.Movement[1] += Globals.currentLevel.Slithering;
+                }
+            }
             Key[] keys = new[] { Key.W, Key.S, Key.A, Key.D, Key.F3, Key.P};
             foreach (Key key in keys)
             {
@@ -98,24 +142,28 @@ namespace MovingEngine
                     switch (key)
                     {
                         case Key.W:
-                            Globals.currentLevel.Public_location.Y += Globals.step;
+                            Globals.player.Movement[1] = Globals.step;
                             break;
 
                         case Key.S:
-                            Globals.currentLevel.Public_location.Y -= Globals.step;
+                            Globals.player.Movement[1] = -Globals.step;
                             break;
 
                         case Key.A:
-                            Globals.currentLevel.Public_location.X += Globals.step;
+                            Globals.player.Movement[0] = Globals.step;
                             break;
                         case Key.D:
-                            Globals.currentLevel.Public_location.X -= Globals.step;
+                            Globals.player.Movement[0] = -Globals.step;
                             break;
                         case Key.F3:
                             if (!Globals.canvas.Children.Contains(Globals.Debug))Globals.canvas.Children.Add(Globals.Debug);
                             Globals.debugging = true;
                             Globals.canvas.Children.Remove(Globals.currentLevel.canvas);
                             Globals.currentLevel = null;
+                            Globals.canvas.Children.Remove(Globals.hpbar);
+                            Globals.canvas.Children.Remove(Globals.hptext);
+                            Globals.canvas.Children.Remove(Globals.HPbars[0]);
+                            Globals.canvas.Children.Remove(Globals.HPbars[1]);
                             new Level(true);
                             break;
                         case Key.P:

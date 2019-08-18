@@ -75,6 +75,8 @@ namespace MovingEngine
             Globals.canvas.Children.Add(hpouter);
             Globals.canvas.Children.Add(hpborder);
             Globals.canvas.Children.Add(hpinner);
+            Globals.HPbars.Add(hpouter);
+            Globals.HPbars.Add(hpborder);
 
             Label hptext = new Label { Height = 50, Width = Globals.canvas.ActualWidth - 60, Foreground = Brushes.Black, Content = "0 / 0", HorizontalContentAlignment = HorizontalAlignment.Center, FontSize = 32 * Globals.fontSizeMultiplier };
             Canvas.SetLeft(hptext, 30);

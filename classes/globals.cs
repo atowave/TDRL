@@ -50,6 +50,7 @@ namespace MovingEngine
         public static List<MouseButton> MouseHandler = new List<MouseButton>();
         public static List<Projectile> projectiles = new List<Projectile>();
         public static Canvas loading;
+        public static List<Rectangle> HPbars = new List<Rectangle>();
         public static Rectangle hpbar;
         public static Label hptext;
         public static int hpbarlength;
@@ -60,7 +61,7 @@ namespace MovingEngine
                     Globals.canvas.ActualHeight/2
                 );
             } }
-        public static Label Debug = new Label { Content = "Current Pos: ", Foreground = Brushes.White, FontSize = 50 };
+        public static Label Debug = new Label { Content = "Current Pos: ", Foreground = Brushes.Red, FontSize = 50 };
     }
     public class Player
     {
@@ -71,10 +72,14 @@ namespace MovingEngine
         public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue };
         public double ShootDelay = 10;
         public double ShootDelayCurrent = 0;
+        public double[] Movement = new double[] {0,0 };
         public double currentStage;
         public double Height { get { return visual.ActualHeight; } }
         public void UpdatePosition()
         {
+            
+            Globals.currentLevel.Public_location.X += Movement[0];
+            Globals.currentLevel.Public_location.Y += Movement[1];
             lastLocation = new Location(Canvas.GetLeft(Globals.currentLevel.canvas), Canvas.GetTop(Globals.currentLevel.canvas));
             Canvas.SetTop(Globals.currentLevel.canvas, Globals.currentLevel.Public_location.Y);
             Canvas.SetLeft(Globals.currentLevel.canvas, Globals.currentLevel.Public_location.X);

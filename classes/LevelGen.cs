@@ -22,12 +22,14 @@ namespace MovingEngine.levels
         public Location Public_location { get; }
         public Canvas canvas { get; }
         public double[] Lvlsize_public { get; }
+        public double Slithering = 0.7;
         public Level(bool debug = false)
         {
+            Globals.player.Movement = new double[] { 0, 0 };
             Globals.currentLevel = this;
             Lvlsize_public = new double[] {
-                (Globals.canvas.ActualWidth /100) *80,
-                (Globals.canvas.ActualHeight /100) *80,
+                Globals.canvas.ActualWidth,
+                Globals.canvas.ActualHeight
                 
             };
             canvas = new Canvas { Background = Brushes.White, Width = Lvlsize_public[0], Height = Lvlsize_public[1] };
@@ -45,7 +47,7 @@ namespace MovingEngine.levels
                     {
                         new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle
                         {
-                            Fill = new ImageBrush(new SourcedImage("pack://application:,,,/resources/meshes/enemy.png").Source),
+                            Fill = new ImageBrush(SpriteList.List["enemy"]),
                             Width = Lvlsize_public[0] / 100 * 5,
                             Height = Lvlsize_public[0] / 100 * 5
                         }, 40, Globals.random.Next(100, 100 * (int)(Globals.player.currentStage / 5) + 100));
