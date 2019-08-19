@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +12,18 @@ namespace MovingEngine.classes
 {
     class SpriteList
     {
-        public static Dictionary<string, ImageSource> List = new Dictionary<string, ImageSource>()
+        public static Dictionary<string, ImageSource> List = new Dictionary<string, ImageSource>();
+        public static void Load(string folder)
         {
-            {"enemy", new SourcedImage("pack://application:,,,/resources/meshes/enemy.png").Source}
-        };
+            foreach (string path in Directory.GetFiles(folder))
+            {
+                string name = path.Split('\\')[path.Split('\\').Length - 1].Split('.')[0];
+                List.Add(name, new SourcedImage(path).Source);
+            }
+            foreach (string path in Directory.GetDirectories(folder))
+            {
+                Load(path);
+            }
+        }
     }
 }

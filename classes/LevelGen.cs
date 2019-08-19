@@ -45,12 +45,7 @@ namespace MovingEngine.levels
                     int rand = Globals.random.Next(0, 100);
                     if (rand < 35 && Globals.currentLevel.enemies.Count < Globals.player.currentStage)
                     {
-                        new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle
-                        {
-                            Fill = new ImageBrush(SpriteList.List["enemy"]),
-                            Width = Lvlsize_public[0] / 100 * 5,
-                            Height = Lvlsize_public[0] / 100 * 5
-                        }, 40, Globals.random.Next(100, 100 * (int)(Globals.player.currentStage / 5) + 100));
+                        new Gunner(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), 40, Globals.random.Next(100, 100 * (int)(Globals.player.currentStage / 5) + 100));
                     }
                     else
                     {
@@ -71,7 +66,7 @@ namespace MovingEngine.levels
 
                 if (Globals.currentLevel.enemies.Count == 0)
                 {
-                    new Enemy(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), new Rectangle { Fill = new ImageBrush(new SourcedImage("pack://application:,,,/resources/meshes/enemy.png").Source), Width = Lvlsize_public[0] / 100 * 5, Height = Lvlsize_public[0] / 100 * 5 }, 40, Globals.random.Next(100, 100));
+                    new Gunner(new Location(Globals.random.Next(0, (int)Lvlsize_public[0]), Globals.random.Next(0, (int)Lvlsize_public[1])), 40, Globals.random.Next(100, 100));
                 }
             }
         }

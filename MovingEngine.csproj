@@ -105,13 +105,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Resource Include="resources\FSEX300.ttf" />
+    <Resource Include="resources\meshes\gunner.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Resource Include="resources\meshes\enemy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

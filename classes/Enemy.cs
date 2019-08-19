@@ -9,12 +9,26 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using UnnamedGame.ObjectClasses;
 
 namespace MovingEngine.classes
 {
     public class Enemy
     {
-        public Location location
+        public double hitboxRadius = 40;
+        public double rotation = 0;
+        public double AI_Threshold = 200;
+        public double AI_Speed = 2.5;
+        public double HP = 100;
+        public double wait;
+        virtual public Location location { get { return new Location(0, 0); } set { } }
+
+        public virtual void AI() { }
+
+    }
+    public class Gunner : Enemy
+    {
+        override public Location location
         {
             get
             {
@@ -26,20 +40,29 @@ namespace MovingEngine.classes
                 Canvas.SetTop(sprite, value.Y - (sprite.Height / 2));
             }
         }
-        public FrameworkElement sprite;
-        public double hitboxRadius = 40;
-        public double rotation = 0;
-        public double AI_Threshold = 200;
-        public double AI_Speed = 2.5;
-        public double HP = 100;
-        public double wait;
+        public Canvas sprite;
 
-        public Enemy(Location origin, FrameworkElement sprite, double hitboxRadius = 40, double HP = 100)
+        public Gunner(Location origin, double hitboxRadius = 40, double HP = 100)
         {
-            this.sprite = sprite;
             this.hitboxRadius = hitboxRadius;
             this.HP = HP;
 
+            sprite = new Canvas
+            {
+                Background = new ImageBrush(SpriteList.List["gunner"]),
+                Width = 70,
+                Height = 70
+            };
+            Rectangle glow = new Rectangle
+            {
+                Fill = new ImageBrush(SpriteList.List["gunner_g"]),
+                Width = 200,
+                Height = 200
+            };
+            
+            Canvas.SetLeft(glow, -65);
+            Canvas.SetTop(glow, -65);
+            sprite.Children.Add(glow);
             Canvas.SetLeft(sprite, origin.X);
             Canvas.SetTop(sprite, origin.Y);
             Canvas.SetZIndex(sprite, 1);
@@ -49,7 +72,7 @@ namespace MovingEngine.classes
             Globals.currentLevel.canvas.Children.Add(sprite);
             Globals.currentLevel.enemies.Add(this);
         }
-        public void AI()
+        override public void AI()
         {
             if (wait == 0)
             {

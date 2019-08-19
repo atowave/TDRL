@@ -3,6 +3,7 @@ using MovingEngine.levels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,8 @@ namespace MovingEngine
             Canvas.SetBottom(Loading, 0);
             Canvas.SetRight(Loading, 0);
             Canvas.SetZIndex(Globals.loading, 1000);
+
+            SpriteList.Load(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "data\\textures"));
 
             Globals.player.HP = Globals.player.baseHP;
 
