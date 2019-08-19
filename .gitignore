@@ -5,8 +5,10 @@
 *.ide-wal
 
 obj/
-bin/
-!bin/Debug/data/
+bin/**/*.exe
+bin/**/*.exe.config
+bin/**/*.pdb
+bin/**/*.zip
 .vs/MovingEngine/v15/Server/sqlite3/db.lock
 .vs/MovingEngine/v15/Server/sqlite3/storage.ide
 .vs/MovingEngine/v15/Server/sqlite3/storage.ide-shm
