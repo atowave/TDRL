@@ -68,7 +68,7 @@ namespace MovingEngine
             }
         }
 
-        private void Mouse_Action()
+        public void Mouse_Action()
         {
             foreach(MouseButton mb in Globals.MouseHandler)
             {
@@ -90,7 +90,7 @@ namespace MovingEngine
             if (Globals.player.ShootDelayCurrent != 0) Globals.player.ShootDelayCurrent--;
         }
 
-        private void Moving()
+        public void Moving()
         {
             if (Globals.player.Movement[0] > 0)
             {

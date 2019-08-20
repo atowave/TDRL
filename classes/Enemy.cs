@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using UnnamedGame.ObjectClasses;
 
@@ -21,6 +22,7 @@ namespace MovingEngine.classes
         public double AI_Speed = 2.5;
         public double HP = 100;
         public double wait;
+        public Rectangle sprite;
         virtual public Location location { get { return new Location(0, 0); } set { } }
 
         public virtual void AI() { }
@@ -40,29 +42,28 @@ namespace MovingEngine.classes
                 Canvas.SetTop(sprite, value.Y - (sprite.Height / 2));
             }
         }
-        public Canvas sprite;
 
         public Gunner(Location origin, double hitboxRadius = 40, double HP = 100)
         {
             this.hitboxRadius = hitboxRadius;
             this.HP = HP;
 
-            sprite = new Canvas
+            sprite = new Rectangle
             {
-                Background = new ImageBrush(SpriteList.List["gunner"]),
+                Fill = Brushes.Red,
                 Width = 70,
                 Height = 70
             };
-            Rectangle glow = new Rectangle
-            {
-                Fill = new ImageBrush(SpriteList.List["gunner_g"]),
-                Width = 200,
-                Height = 200
-            };
-            
-            Canvas.SetLeft(glow, -65);
-            Canvas.SetTop(glow, -65);
-            sprite.Children.Add(glow);
+            sprite.Effect =
+                new DropShadowEffect
+                {
+                    Color = Brushes.Red.Color,
+                    Direction = 0,
+                    ShadowDepth = 0,
+                    Opacity = 1,
+                    BlurRadius = 25
+                };
+
             Canvas.SetLeft(sprite, origin.X);
             Canvas.SetTop(sprite, origin.Y);
             Canvas.SetZIndex(sprite, 1);

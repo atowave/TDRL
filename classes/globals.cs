@@ -62,6 +62,7 @@ namespace MovingEngine
                 );
             } }
         public static Label Debug = new Label { Content = "Current Pos: ", Foreground = Brushes.Red, FontSize = 50 };
+        public static int DispatcherTime = 1000 / 60;
     }
     public class Player
     {
