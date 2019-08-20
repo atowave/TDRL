@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using MovingEngine.classes;
@@ -70,7 +71,16 @@ namespace MovingEngine
         public int baseHP = 180;
         public int HP;
         public Location lastLocation = new Location(0, 0);
-        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue };
+        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue, Effect =
+            new DropShadowEffect
+            {
+                Color = Brushes.Blue.Color,
+                Direction = 0,
+                ShadowDepth = 0,
+                Opacity = 1,
+                BlurRadius = 25
+            }
+        };
         public double ShootDelay = 10;
         public double ShootDelayCurrent = 0;
         public double[] Movement = new double[] {0,0 };

@@ -65,6 +65,7 @@ namespace MovingEngine.classes
         public int projectilesPerShot = 1;
         public string[] Tags = new string[] { };
         public Action onAim = () => { };
+        public double disappearTime = 1;
         public WeaponItem(int probability, string name, int cooldown, double damage, int bulletspeed, int accuracy, Action<Projectile> onFire) : base(probability, name)
         {
             this.cooldown = cooldown;

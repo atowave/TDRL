@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MovingEngine.classes
 {
@@ -20,12 +22,29 @@ namespace MovingEngine.classes
         public Projectile(Rectangle cn, Point origin, double[] Movement1, bool enemy = false, double dmg = 10)
         {
             canvas = cn;
+            canvas.Effect =
+                new DropShadowEffect
+                {
+                    Color = ((SolidColorBrush)canvas.Fill).Color,
+                    Direction = 0,
+                    ShadowDepth = 0,
+                    Opacity = 1,
+                    BlurRadius = 25
+                };
             this.enemy = enemy;
             this.dmg = dmg;
             Globals.currentLevel.canvas.Children.Add(cn);
             Canvas.SetLeft(cn, origin.X);
             Canvas.SetTop(cn, origin.Y);
             pos = origin;
+
+            DispatcherTimer disappear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(Weapons.equipped.disappearTime) };
+            disappear.Tick += (a, v) =>
+            {
+                disappear.Stop();
+                Kill();
+            };
+            disappear.Start();
 
             Globals.projectiles.Add(this);
             Movement = Movement1;
@@ -77,11 +96,15 @@ namespace MovingEngine.classes
             {
                 Globals.player.HP -= (int)dmg;
                 Globals.DmgInd((int)dmg, 0, false, new Location(Globals.Middlepoint.X - Globals.currentLevel.Public_location.X, Globals.Middlepoint.Y - Globals.currentLevel.Public_location.Y - Globals.player.Height / 1));
-                
-                Globals.projectiles.Remove(this);
-                Globals.currentLevel.canvas.Children.Remove(canvas);
+
+                Kill();
                 if (Globals.player.HP <= 0) GameLoop.rungame(2);
             }
+        }
+        public void Kill()
+        {
+            Globals.projectiles.Remove(this);
+            Globals.currentLevel.canvas.Children.Remove(canvas);
         }
     }
 }
