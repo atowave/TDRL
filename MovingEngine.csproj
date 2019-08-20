@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,6 +69,8 @@
     <Compile Include="classes\Enemy.cs" />
     <Compile Include="classes\GameLoop.cs" />
     <Compile Include="classes\globals.cs" />
+    <Compile Include="classes\Hitbox.cs" />
+    <Compile Include="classes\Intersection.cs" />
     <Compile Include="classes\ItemBase.cs" />
     <Compile Include="classes\LevelObj.cs" />
     <Compile Include="classes\MainMenu.cs" />
