@@ -21,7 +21,11 @@ namespace MovingEngine
         {
             Canvas.SetTop(Globals.player.visual, (Globals.canvas.ActualHeight - Globals.player.visual.ActualHeight) / 2);
             Canvas.SetLeft(Globals.player.visual, (Globals.canvas.ActualWidth - Globals.player.visual.ActualWidth) / 2);
-            if (Globals.currentLevel.enemies.Count == 0 && !Globals.debugging) rungame(1);
+            if (Globals.currentLevel.enemies.Count == 0 && !Globals.debugging)
+            {
+                foreach (LevelObj obj in Globals.currentLevel.objs.ToArray()) obj.Disappear();
+                new ExitLevelObj(new Location((Globals.currentLevel.canvas.ActualWidth - 70) / 2, (Globals.currentLevel.canvas.ActualHeight - 70) / 2), new Size(70, 70), Brushes.White);
+            }
 
             Weapons.Aim();
             Moving();
@@ -29,13 +33,14 @@ namespace MovingEngine
             foreach (Projectile projectile in Globals.projectiles.ToArray())  projectile.Move();
             foreach (Enemy enemy in Globals.currentLevel.enemies.ToArray()) enemy.AI();
             Collision.CheckCollision();
-            Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], MovVec: ["+Globals.player.Movement[0]+" | "+ Globals.player.Movement[1]+"] " + Globals.player.rad + "°"+ " Pjc:"+Globals.projectiles.Count;
-            Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
-            Globals.Debug.Content += "\nWeapon: Acc " + Weapons.equipped.currentAccuracy;
-            Canvas.SetZIndex(Globals.Debug, 600);
-            Globals.hpbar.Width = Globals.hpbarlength * ((double)Globals.player.HP / Globals.player.baseHP);
-            Globals.hptext.Content = Globals.player.HP + " / " + Globals.player.baseHP;
+            if (Globals.debugging)
+            {
+                Globals.Debug.Content = "Current Pos: [" + Canvas.GetLeft(Globals.currentLevel.canvas) + " | " + Canvas.GetTop(Globals.currentLevel.canvas) + "], MovVec: ["+Globals.player.Movement[0]+" | "+ Globals.player.Movement[1]+"] " + Globals.player.rad + "°"+ " Pjc:"+Globals.projectiles.Count;
+                Globals.Debug.Content += "\nVPR: " + Collision.visualPointsR[0] + ", " + Collision.visualPointsR[1] + ", " + Collision.visualPointsR[2] + ", " + Collision.visualPointsR[3];
+                Globals.Debug.Content += "\nWeapon: Acc " + Weapons.equipped.currentAccuracy;
+            }
             Globals.step = Globals.default_step;
+            Globals.tps++;
         }
 
 
@@ -161,6 +166,7 @@ namespace MovingEngine
                             Globals.canvas.Children.Remove(Globals.hptext);
                             Globals.canvas.Children.Remove(Globals.HPbars[0]);
                             Globals.canvas.Children.Remove(Globals.HPbars[1]);
+                            Canvas.SetZIndex(Globals.Debug, 600);
                             new Level(true);
                             break;
                         case Key.P:

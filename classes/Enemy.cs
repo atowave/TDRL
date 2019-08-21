@@ -22,7 +22,7 @@ namespace MovingEngine.classes
         public double AI_Speed = 2.5;
         public double HP = 100;
         public double wait;
-        public Rectangle sprite;
+        public Canvas sprite;
         virtual public Location location { get { return new Location(0, 0); } set { } }
 
         public virtual void AI() { }
@@ -48,21 +48,36 @@ namespace MovingEngine.classes
             this.hitboxRadius = hitboxRadius;
             this.HP = HP;
 
-            sprite = new Rectangle
+            sprite = new Canvas
             {
-                Fill = Brushes.Red,
+                Background = Brushes.Red,
                 Width = 70,
                 Height = 70
             };
-            sprite.Effect =
-                new DropShadowEffect
+            if (!(bool)Globals.settings["Graphics"]["UseHardcodedGlowForPlayerAndEnemies"])
+            {
+                if ((bool)Globals.settings["Graphics"]["CalculatedGlowEffectEnabled"]) sprite.Effect =
+                    new DropShadowEffect
+                    {
+                        Color = Brushes.Black.Color,
+                        Direction = 0,
+                        ShadowDepth = 0,
+                        Opacity = 1,
+                        BlurRadius = (int)Globals.settings["Graphics"]["CalculatedGlowEffectRadius"]
+                    };
+            }
+            else
+            {
+                Image glow = new Image
                 {
-                    Color = Brushes.Red.Color,
-                    Direction = 0,
-                    ShadowDepth = 0,
-                    Opacity = 1,
-                    BlurRadius = 25
+                    Source = SpriteList.List["gunner_g"],
+                    Width = 200,
+                    Height = 200
                 };
+                Canvas.SetLeft(glow, -65);
+                Canvas.SetTop(glow, -65);
+                sprite.Children.Add(glow);
+            }
 
             Canvas.SetLeft(sprite, origin.X);
             Canvas.SetTop(sprite, origin.Y);
@@ -95,7 +110,7 @@ namespace MovingEngine.classes
                 }
 
                 double rand = Globals.random.Next(0, 100);
-                if (rand <= 10)
+                if (rand <= 5)
                 {
                     Rectangle shoot_projectile = new Rectangle
                     {

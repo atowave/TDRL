@@ -75,6 +75,7 @@
     <Compile Include="classes\SourcedImage.cs" />
     <Compile Include="classes\SpriteList.cs" />
     <Compile Include="classes\Weapons.cs" />
+    <Compile Include="Extensions\INIParser.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="classes\LevelGen.cs" />
     <Compile Include="MainWindow.xaml.cs">

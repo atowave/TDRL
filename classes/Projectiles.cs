@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -19,17 +20,18 @@ namespace MovingEngine.classes
         bool enemy;
         Point pos = new Point(0, 0);
         double dmg;
+        bool[] mov = new bool[] { false, false };
         public Projectile(Rectangle cn, Point origin, double[] Movement1, bool enemy = false, double dmg = 10)
         {
             canvas = cn;
-            canvas.Effect =
+            if ((bool)Globals.settings["Graphics"]["CalculatedGlowEffectEnabled"]) canvas.Effect =
                 new DropShadowEffect
                 {
                     Color = ((SolidColorBrush)canvas.Fill).Color,
                     Direction = 0,
                     ShadowDepth = 0,
                     Opacity = 1,
-                    BlurRadius = 25
+                    BlurRadius = (int)Globals.settings["Graphics"]["CalculatedGlowEffectRadius"]
                 };
             this.enemy = enemy;
             this.dmg = dmg;
@@ -38,14 +40,26 @@ namespace MovingEngine.classes
             Canvas.SetTop(cn, origin.Y);
             pos = origin;
 
-            DispatcherTimer disappear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(Weapons.equipped.disappearTime) };
-            disappear.Tick += (a, v) =>
+            DoubleAnimation movementX = new DoubleAnimation
             {
-                disappear.Stop();
-                Kill();
+                From = origin.X,
+                To = origin.X + (Movement1[0] * Globals.DispatcherTime),
+                Duration = TimeSpan.FromSeconds(1),
             };
-            disappear.Start();
+            DoubleAnimation movementY = new DoubleAnimation
+            {
+                From = origin.Y,
+                To = origin.Y + (Movement1[1] * Globals.DispatcherTime),
+                Duration = TimeSpan.FromSeconds(1),
+            };
 
+            movementX.Completed += (a, b) => mov[0] = true;
+            movementY.Completed += (a, b) => mov[1] = true;
+
+            canvas.BeginAnimation(Canvas.LeftProperty, movementX);
+            canvas.BeginAnimation(Canvas.TopProperty, movementY);
+
+            Canvas.SetZIndex(canvas, -1);
             Globals.projectiles.Add(this);
             Movement = Movement1;
         }
@@ -61,13 +75,7 @@ namespace MovingEngine.classes
         }
         public void Move()
         {
-            Canvas.SetZIndex(canvas, -1);
-
-            pos.X = pos.X + Movement[0];
-            pos.Y = pos.Y + Movement[1];
-            Canvas.SetLeft(canvas, pos.X);
-            Canvas.SetTop(canvas, pos.Y);
-
+            if (mov[0] && mov[1]) Kill();
             Location center = new Location(Canvas.GetLeft(canvas) + (canvas.Width / 2), Canvas.GetTop(canvas) + (canvas.Height / 2));
             if (Collision.Colliding(new[] { center }))
             {

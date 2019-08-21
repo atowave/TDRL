@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,15 @@ namespace MovingEngine.classes
 
             if (Colliding(visualPointsR))
             {
-                Globals.player.UpdatePosition(Globals.player.lastLocation);
+                try
+                {
+                    LevelObj obj = GetObject(visualPointsR);
+                    if (obj.collision) Globals.player.UpdatePosition(Globals.player.lastLocation);
+                    obj.actionOnCollision();
+                } catch
+                {
+                    Globals.player.UpdatePosition(Globals.player.lastLocation);
+                }
             }
             if(Enemys(visualPointsR))
             {

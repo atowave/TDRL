@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,10 +17,13 @@ using MovingEngine.levels;
 
 namespace MovingEngine
 {
-    public static class Globals
+    public class Globals
     {
         public static void DmgInd(int dmg, int currenthp, bool enemy, Location location)
         {
+            hpbar.Width = Globals.hpbarlength * ((double)Globals.player.HP / Globals.player.baseHP);
+            hptext.Content = Globals.player.HP + " / " + Globals.player.baseHP;
+
             Label dmglabel = new Label { Content = -dmg + (enemy ? ", (" + currenthp + ")" : ""), Foreground = (enemy ? Brushes.Green : Brushes.Red), FontSize = 36 * Globals.fontSizeMultiplier };
             Canvas.SetLeft(dmglabel, location.X + random.Next(-32, 33));
             Canvas.SetTop(dmglabel, location.Y);
@@ -37,7 +41,7 @@ namespace MovingEngine
             };
         }
 
-        public static Canvas canvas;
+        public static Canvas canvas = new Canvas { Background = Brushes.Black };
         public static MainWindow window;
         public static GameLoop loop = new GameLoop();
         public static Player player = new Player();
@@ -48,6 +52,7 @@ namespace MovingEngine
         public static Random random = new Random();
         public static double fontSizeMultiplier;
         public static DispatcherTimer gamelooptimer;
+        public static Dictionary<string, Dictionary<string, ValueType>> settings = new Dictionary<string, Dictionary<string, ValueType>>();
         public static List<MouseButton> MouseHandler = new List<MouseButton>();
         public static List<Projectile> projectiles = new List<Projectile>();
         public static Canvas loading;
@@ -56,6 +61,7 @@ namespace MovingEngine
         public static Label hptext;
         public static int hpbarlength;
         public static bool debugging = false;
+        public static int tps = 0;
         public static Point Middlepoint { get {
                 return new Point(
                     Globals.canvas.ActualWidth/2,
@@ -63,7 +69,8 @@ namespace MovingEngine
                 );
             } }
         public static Label Debug = new Label { Content = "Current Pos: ", Foreground = Brushes.Red, FontSize = 50 };
-        public static int DispatcherTime = 1000 / 60;
+        public static int DispatcherTime = 50;
+        public static double speedOverTime = 0.3 + 0.7;
     }
     public class Player
     {
@@ -71,16 +78,7 @@ namespace MovingEngine
         public int baseHP = 180;
         public int HP;
         public Location lastLocation = new Location(0, 0);
-        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue, Effect =
-            new DropShadowEffect
-            {
-                Color = Brushes.Blue.Color,
-                Direction = 0,
-                ShadowDepth = 0,
-                Opacity = 1,
-                BlurRadius = 25
-            }
-        };
+        public Canvas visual = new Canvas { Width = 70, Height = 70, Background = Brushes.Blue };
         public double ShootDelay = 10;
         public double ShootDelayCurrent = 0;
         public double[] Movement = new double[] {0,0 };

@@ -19,7 +19,7 @@ namespace MovingEngine.levels
         public List<Enemy> enemies = new List<Enemy>();
         public List<LevelObj> objs = new List<LevelObj>();
 
-        public Location Public_location { get; }
+        public Location Public_location { get; set; }
         public Canvas canvas { get; }
         public double[] Lvlsize_public { get; }
         public double Slithering = 0.7;
